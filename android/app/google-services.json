@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "339029405949",
+    "project_id": "covidwatcher-11d14",
+    "storage_bucket": "covidwatcher-11d14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339029405949:android:d2d8b9a78a37617ca78e94",
+        "android_client_info": {
+          "package_name": "com.chessasuke.covid_watcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339029405949-3olmi0h87jmf1al09duse6dqphg9s0s7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj3Om7iafTSCQn-Lg8yBiBDEZ6QPeRKf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339029405949-3olmi0h87jmf1al09duse6dqphg9s0s7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
