@@ -22,13 +22,12 @@ class _TimelineContainerState extends State<TimelineContainer> {
       duration: const Duration(milliseconds: 500),
       child: viewMore == false
           ? TextButton(
+              child: const Text('View More'),
               onPressed: () {
                 setState(() {
                   viewMore = true;
                 });
               },
-              child: Text('View More',
-                  style: TextStyle(color: Theme.of(context).accentColor)),
             )
           : Column(
               mainAxisSize: MainAxisSize.min,
@@ -40,8 +39,7 @@ class _TimelineContainerState extends State<TimelineContainer> {
                       viewMore = false;
                     });
                   },
-                  child: Text('View Less',
-                      style: TextStyle(color: Theme.of(context).accentColor)),
+                  child: const Text('View Less'),
                 )),
                 Flexible(
                   child: CustomScrollView(slivers: [

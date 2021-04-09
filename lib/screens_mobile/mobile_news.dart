@@ -9,7 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-import '../auth/logic_functions.dart';
+import '../auth/auth_logic.dart';
 import '../constants.dart';
 import '../controllers/news_controller.dart';
 import '../models/news_model.dart';

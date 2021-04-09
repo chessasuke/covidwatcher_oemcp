@@ -1,4 +1,4 @@
-import 'package:covid_watcher/controllers/filterProvider.dart';
+import 'file:///D:/1_FLUTTER/WEB/covid_watcher/lib/old/filterProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

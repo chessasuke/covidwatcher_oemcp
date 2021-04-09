@@ -5,8 +5,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 /// The type field determines if it's a Sanitation(false) or Covid(true) Event
 
 class BuildingEventModel {
-  BuildingEventModel(
-      {this.buildingName, this.timestamp, this.comments, this.type, this.id});
+  BuildingEventModel({
+    this.buildingName,
+    this.timestamp,
+    this.comments,
+    this.type,
+    this.id,
+  });
 
   final String id;
   final String buildingName;

@@ -1,28 +1,27 @@
-import 'dart:collection';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:covid_watcher/models/building_event_model.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final sanitizedCasesProvider =
-    StreamProvider.autoDispose<QuerySnapshot>((ref) async* {
-  ref.maintainState = true;
-
-  final stream = FirebaseFirestore.instance
-      .collection('sanitized-cases')
-      .orderBy('timestamp', descending: true)
-      .snapshots()
-      .distinct();
-
-  /// This ensures that we dont trigger a request
-  await for (final value in stream) {
-    if (value.runtimeType == QuerySnapshot) {
-      QuerySnapshot temp = value;
-      print('QuerySnapshot in sanitation value size: ${temp.size}');
-    }
-    yield value;
-  }
-});
+//import 'dart:collection';
+//import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:covid_watcher/models/building_event_model.dart';
+//import 'package:flutter/widgets.dart';
+//import 'package:flutter_riverpod/flutter_riverpod.dart';
+//
+//final sanitationCasesProvider =
+//    StreamProvider.autoDispose<QuerySnapshot>((ref) async* {
+//  ref.maintainState = true;
+//
+//  final stream = FirebaseFirestore.instance
+//      .collection('sanitized-cases')
+//      .orderBy('timestamp', descending: true)
+//      .snapshots()
+//      .distinct();
+//
+//  await for (final value in stream) {
+//    if (value.runtimeType == QuerySnapshot) {
+//      QuerySnapshot temp = value;
+//      print('QuerySnapshot in sanitation value size: ${temp.size}');
+//    }
+//    yield value;
+//  }
+//});
 
 //final sanitizedCasesProvider = StreamProvider.autoDispose((ref) async* {
 ////  final controller = ref.watch(sanitizedControllerProvider);

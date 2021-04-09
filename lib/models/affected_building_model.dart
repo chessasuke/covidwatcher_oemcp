@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'building_event_model.dart';
 
-class Building {
-  Building({
-    this.coordinate,
+class AffectedBuilding {
+  AffectedBuilding({
+    this.centroid,
     this.name,
   });
 
@@ -15,7 +15,7 @@ class Building {
 
   /// The first Offset provided by dataCoordinate for this building
   /// It's where the marker will appear
-  final Offset coordinate;
+  final Offset centroid;
 
   /// The timestamp of the last [BuildingEvent]
   DateTime _timestamp;
@@ -43,6 +43,13 @@ class Building {
     udpateStatus();
   }
 
+  bool removeBuildingTimeLineEvent(BuildingEventModel value) {
+    var isRemoved = _buildingTimeline.remove(value);
+    print('isRemoved: $isRemoved');
+    udpateStatus();
+    return isRemoved;
+  }
+
   void addBuildingTimeLine(List<BuildingEventModel> value) {
     _buildingTimeline.addAll(value);
     // ignore: cascade_invocations
@@ -65,6 +72,8 @@ class Building {
           if (_buildingTimeline[j].type == false) break;
           _activeCases++;
         }
+      } else {
+        _activeCases = 0;
       }
     }
   }

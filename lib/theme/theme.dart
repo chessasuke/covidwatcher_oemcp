@@ -31,8 +31,8 @@ class AppDynamicTheme extends ChangeNotifier {
         shadowColor: Colors.black,
         brightness: Brightness.dark,
         elevation: 50),
-    accentColor: Colors.green,
-    cardColor: Colors.green.withOpacity(0.75),
+    accentColor: Colors.lightBlue,
+    cardColor: Colors.lightBlueAccent.withOpacity(0.75),
     primaryTextTheme: TextTheme(
       button: TextStyle(
         color: Colors.blueGrey[200],
@@ -59,7 +59,8 @@ class AppDynamicTheme extends ChangeNotifier {
       ), // normal
     ),
     textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(primary: Colors.green, elevation: 30)),
+        style: TextButton.styleFrom(
+            primary: Colors.lightBlueAccent, elevation: 30)),
     bottomAppBarColor: Colors.black,
     iconTheme: IconThemeData(color: Colors.blueGrey[200]),
     brightness: Brightness.dark,
@@ -77,7 +78,7 @@ class AppDynamicTheme extends ChangeNotifier {
         brightness: Brightness.light,
         elevation: 50),
     accentColor: Colors.blueAccent,
-    cardColor: Colors.green.withOpacity(0.75),
+    cardColor: Colors.lightBlueAccent.withOpacity(0.75),
     primaryTextTheme: TextTheme(
       button: TextStyle(
         color: Colors.blueGrey,
@@ -103,7 +104,8 @@ class AppDynamicTheme extends ChangeNotifier {
       ), // normal
     ),
     textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(primary: Colors.green, elevation: 30)),
+        style: TextButton.styleFrom(
+            primary: Colors.lightBlueAccent, elevation: 30)),
     bottomAppBarColor: Colors.blueGrey[900],
     iconTheme: const IconThemeData(color: Colors.blueGrey),
     brightness: Brightness.light,

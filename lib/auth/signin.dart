@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../theme/adabtableFontSize.dart';
-import 'logic_functions.dart';
+import 'auth_logic.dart';
 import 'reset_password.dart';
 import 'signup.dart';
 import 'strings.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../heatmap/heatMap.dart';
+import '../map/heatMap.dart';
 import '../screens_mobile/mobile_page_manager.dart';
 import '../theme/responsive.dart';
 

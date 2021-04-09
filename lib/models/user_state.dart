@@ -35,6 +35,11 @@ class UserNotifier extends StateNotifier<UserState> {
         state = const UserError('Error fetching user info');
       }
     }
+
+    /// TODO check if this is an improvement
+//    else {
+//      state = const UserInitial();
+//    }
   }
 }
 

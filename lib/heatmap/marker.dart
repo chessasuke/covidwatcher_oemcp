@@ -4,13 +4,13 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
-import '../models/building_model.dart';
+import '../models/affected_building_model.dart';
 import 'timeline_container.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class CustomMarker extends StatelessWidget {
   const CustomMarker({this.building});
-  final Building building;
+  final AffectedBuilding building;
 
   /// Color of marker depends on the # of active cases
   Color initializeColor(int activeCases) {
@@ -29,8 +29,8 @@ class CustomMarker extends StatelessWidget {
     final Size screenSize = MediaQuery.of(context).size;
 
     return Positioned(
-      left: building.coordinate.dx,
-      top: building.coordinate.dy,
+      left: building.centroid.dx,
+      top: building.centroid.dy,
       child: GestureDetector(
         onTap: () {
           showDialog(
@@ -128,12 +128,6 @@ class CustomMarker extends StatelessWidget {
               });
         },
         child: Container(
-//          decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
-//            BoxShadow(
-//              color: Colors.red[400],
-//              blurRadius: 2.0,
-//            ),
-//          ]),
           child: Icon(
             building.status
                 ? FontAwesomeIcons.virus

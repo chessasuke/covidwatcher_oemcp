@@ -113,8 +113,6 @@ class AuthenticationService {
     print('signup');
 
     if (email != null && pass != null) {
-      print('if');
-
       try {
         final UserCredential userCredential = await _auth
             .createUserWithEmailAndPassword(email: email, password: pass);
@@ -151,7 +149,6 @@ class AuthenticationService {
         print(e);
       }
     } else {
-      print('else');
       if (email == null) {
         statusCode = 'email cannot be empty';
       } else if (pass == null) statusCode = 'password cannot be empty';
@@ -212,7 +209,6 @@ class AuthenticationService {
 
   /// Signs out the user and set user info to null
   Future<String> signOut() async {
-    print('signout');
     try {
       await _auth.signOut();
       return 'User signed out';
@@ -266,7 +262,6 @@ class AuthenticationService {
 
       if (statusCode == 'ok') {
         try {
-          print('[Delete User Auth]');
           await _auth.currentUser.delete().then((value) {
             statusCode = 'ok';
             print('statusCode (auth try): $statusCode');

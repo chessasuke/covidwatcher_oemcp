@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'logic_functions.dart';
+import 'auth_logic.dart';
 
 /// TextField Section to input user info
 class TextFieldSection extends StatefulWidget {

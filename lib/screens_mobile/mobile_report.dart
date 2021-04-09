@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../animation_example.dart';
+import '../animation.dart';
 import '../auth/signin.dart';
 
 class MobileReport extends ConsumerWidget {

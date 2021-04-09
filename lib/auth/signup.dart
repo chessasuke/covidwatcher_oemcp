@@ -5,7 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'logic_functions.dart';
+import 'auth_logic.dart';
 import 'custom_auth_widgets.dart';
 import 'signup_followup.dart';
 import 'textfield_section.dart';
