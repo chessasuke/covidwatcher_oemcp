@@ -20,13 +20,10 @@ class _ScreenSettingState extends State<ScreenSetting> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(body: Consumer(builder: (context, watch, build) {
-      final UserState currentUser = watch(userProvider).state;
-      print('currentUser: $currentUser');
+      final UserState currentUser = watch(userProvider.state);
       return Stack(
         children: [
-          if (currentUser != const UserInitial() &&
-              currentUser != const UserLoading() &&
-              currentUser != const UserError())
+          if (currentUser is UserLoaded)
             Align(
               alignment: Alignment.center,
               child: TextButton(
@@ -41,7 +38,7 @@ class _ScreenSettingState extends State<ScreenSetting> {
                         .copyWith(color: Colors.blue),
                   )),
             )
-          else
+          else if (currentUser == const UserInitial())
             Align(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -94,6 +91,58 @@ class _ScreenSettingState extends State<ScreenSetting> {
                   ),
                 ],
               ),
+            )
+          else if (currentUser == const UserLoading())
+            const Center(
+              child: SizedBox(
+                  width: 100, height: 100, child: CircularProgressIndicator()),
+            )
+          else
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('Soemthing went wrong, try again'),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).buttonColor.withOpacity(0.7),
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: TextButton(
+                      onPressed: () async {
+//                        PageManager.of(context).addSignIn();
+                        final response = await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const SignIn();
+                            });
+                        print('response: $response');
+                        if (response.runtimeType == String &&
+                            response == 'update!') {
+                          print('set state');
+                          setState(() {});
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Sign in',
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText1
+                                  .copyWith(color: Colors.blue),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.only(bottom: 16.0, top: 8),
+                              child:
+                                  Text('Please sign in to manage your profile'),
+                            ),
+                          ],
+                        ),
+                      )),
+                ),
+              ],
             ),
           if (!ResponsiveWidget.isMobileScreen(context))
             Positioned(top: 10, left: 10, child: WebMenu()),

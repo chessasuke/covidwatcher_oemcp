@@ -23,14 +23,11 @@ class _ScreenReportState extends State<ScreenReport> {
     return SafeArea(child: Scaffold(
         body: SizedBox.expand(child: Consumer(builder: (context, watch, child) {
       /// TODO Enable user status again after finish the form
-      final currentUser = watch(userProvider).state;
-      print('currentUser: $currentUser');
+      final UserState currentUser = watch(userProvider.state);
 
       return Stack(
         children: [
-          if (currentUser != const UserInitial() &&
-              currentUser != const UserLoading() &&
-              currentUser != const UserError())
+          if (currentUser is UserLoaded)
             Stack(
               children: [
                 ReportForm(),
@@ -56,7 +53,6 @@ class _ScreenReportState extends State<ScreenReport> {
                     ),
                     child: TextButton(
                         onPressed: () async {
-//                        PageManager.of(context).addSignIn();
                           final response = await showDialog(
                               context: context,
                               builder: (context) {
