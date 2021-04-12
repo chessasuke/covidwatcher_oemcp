@@ -36,6 +36,8 @@ class Heatmap extends ConsumerWidget {
     List<Street> streets,
     BuildingController buildingController,
   ) {
+    print(buildingController.affectedBuildings.length);
+
     List<Widget> list = [
       Container(
         width: screenSize.width,
@@ -166,7 +168,7 @@ class Heatmap extends ConsumerWidget {
 //    var filterName = watch(filterNameProvider).state;
 
     final buildings = watch(buildingProvider);
-    final affectedBuildings = watch(affectedBuildingsProvider).state;
+    final affectedBuildings = watch(affectedBuildingsProvider);
 
     final structures4d = watch(structure4dProvider);
     final streets = watch(streetsProvider);
@@ -190,7 +192,7 @@ class Heatmap extends ConsumerWidget {
               buildings,
               structures4d,
               streets,
-              affectedBuildings,
+              affectedBuildings.state,
             )),
           ),
           if (showSearchBar)

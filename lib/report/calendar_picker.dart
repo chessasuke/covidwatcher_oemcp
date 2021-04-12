@@ -1,4 +1,5 @@
 import 'package:covid_watcher/report/calendar_day.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 final datePickerProvider = StateProvider<DateTime>((ref) => DateTime.now());
+final timePickerProvider = StateProvider<TimeOfDay>((ref) => TimeOfDay.now());
 
 class CustomDatePicker extends ConsumerWidget {
   List<String> weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
@@ -46,6 +48,7 @@ class CustomDatePicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final selectedDate = watch(datePickerProvider).state;
+    final selectedTime = watch(timePickerProvider).state;
 
     return GestureDetector(
       onTap: () {
@@ -58,34 +61,75 @@ class CustomDatePicker extends ConsumerWidget {
                 child: SimpleDialog(
                   title: Row(
                     children: const [
-                      Text('Pick Date'),
+                      Text('Pick Date & Time'),
                       SizedBox(width: 20),
-                      Icon(FontAwesomeIcons.calendar)
+                      Flexible(child: Icon(FontAwesomeIcons.calendar))
                     ],
                   ),
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: weekDays
-                            .map((e) => Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: SizedBox(
-                                    width: 26,
-                                    child: Center(
-                                      child: Text(e),
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
                       child: Column(
-                        children: buildCalendar(selectedDate),
-                      ),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            /// Weekdays abbr
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: weekDays
+                                  .map((e) => Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: SizedBox(
+                                          width: 26,
+                                          child: Center(
+                                            child: Text(e),
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
+                            const SizedBox(height: 10),
+
+                            ///
+                            /// Actual calendar
+                            ///
+                            Column(
+                              children: buildCalendar(selectedDate),
+                            ),
+                            const SizedBox(height: 10),
+
+                            ///
+                            /// TIME
+                            ///
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextButton(
+                                  onPressed: () async {
+                                    var selectedTime = await showTimePicker(
+                                      initialTime: TimeOfDay.now(),
+                                      context: context,
+                                    );
+                                    selectedTime ??= TimeOfDay.now();
+                                    context.read(timePickerProvider).state =
+                                        selectedTime;
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(selectedTime.format(context)),
+                                      const SizedBox(width: 20),
+                                      const Icon(FontAwesomeIcons.solidClock),
+                                    ],
+                                  )),
+                            ),
+                            const SizedBox(height: 10),
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('OK'),
+                              ),
+                            ),
+                            const SizedBox(width: 20)
+                          ]),
                     )
                   ],
                 ),
@@ -95,15 +139,17 @@ class CustomDatePicker extends ConsumerWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-              DateFormat("yyyy-MM-dd")
-                  .format(DateTime.parse(selectedDate.toString()))
-                  .toString(),
-              style: TextStyle(fontSize: 24)),
+          Flexible(
+            child: Text(
+                '${DateFormat("yyyy-MM-dd").format(DateTime.parse(selectedDate.toString())).toString()}   ${selectedTime.format(context)}',
+                style: const TextStyle(fontSize: 24)),
+          ),
           const SizedBox(width: 20),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 4.0),
-            child: Icon(FontAwesomeIcons.calendarAlt, size: 20),
+          const Flexible(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 4.0),
+              child: Icon(FontAwesomeIcons.calendarAlt, size: 20),
+            ),
           ),
         ],
       ),

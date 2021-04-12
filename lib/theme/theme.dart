@@ -60,7 +60,7 @@ class AppDynamicTheme extends ChangeNotifier {
     ),
     textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-            primary: Colors.lightBlueAccent, elevation: 30)),
+            primary: Colors.lightBlueAccent, elevation: 50)),
     bottomAppBarColor: Colors.black,
     iconTheme: IconThemeData(color: Colors.blueGrey[200]),
     brightness: Brightness.dark,

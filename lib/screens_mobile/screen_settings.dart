@@ -4,6 +4,7 @@ import 'package:covid_watcher/navigator/page_manager.dart';
 import 'package:covid_watcher/theme/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../auth/signin.dart';
@@ -25,18 +26,56 @@ class _ScreenSettingState extends State<ScreenSetting> {
         children: [
           if (currentUser is UserLoaded)
             Align(
-              alignment: Alignment.center,
-              child: TextButton(
-                  onPressed: () async {
-                    await context.read(authServiceProvider).signOut();
-                  },
-                  child: Text(
-                    'Sign out',
-                    style: Theme.of(context)
-                        .primaryTextTheme
-                        .bodyText1
-                        .copyWith(color: Colors.blue),
-                  )),
+              alignment: Alignment.topCenter,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        print('notifications');
+                      },
+                      child: const Text('Manage Notifications')),
+                  Container(
+                    constraints: const BoxConstraints(maxWidth: 150),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).buttonColor.withOpacity(0.7),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: TextButton(
+                        onPressed: () async {
+                          await context.read(authServiceProvider).signOut();
+                        },
+                        child: Text(
+                          'Sign out',
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              .copyWith(color: Colors.blue),
+                        )),
+                  ),
+                  Container(
+                    constraints: const BoxConstraints(maxWidth: 150),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).buttonColor.withOpacity(0.7),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: TextButton(
+                        onPressed: () async {
+                          await context
+                              .read(authServiceProvider)
+                              .deleteAccount(currentUser.user.getUid);
+                        },
+                        child: Text(
+                          'Delete Account',
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              .copyWith(color: Colors.redAccent),
+                        )),
+                  )
+                ],
+              ),
             )
           else if (currentUser == const UserInitial())
             Align(

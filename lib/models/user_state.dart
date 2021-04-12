@@ -30,9 +30,10 @@ class UserNotifier extends StateNotifier<UserState> {
       try {
         state = const UserLoading();
         final userInfo = await UserClient.fetchUserInfo(uid);
-        print('user loaded');
+        print('info loaded');
         state =
             UserLoaded(user: UserModel.fromDocumentReference(doc: userInfo));
+        print('user loaded');
       } catch (e) {
         state = const UserError();
       }
@@ -61,6 +62,8 @@ class UserLoaded extends UserState {
   UserModel user;
 
   UserLoaded({this.user});
+
+  UserModel get getUser => user;
 
   @override
   bool operator ==(Object o) {

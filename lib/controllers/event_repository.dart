@@ -22,11 +22,11 @@ final eventsControllerProvider =
   /// Repository to store the [BuildingEvent]s
   final eventsRepository = ref.watch(eventRepositoryProvider).state;
 
-//  print(
+  //  print(
 //      '----------------list of events received in eventsProvider----------------');
 //  if (newCovidEvents.data != null) {
 //    if (newCovidEvents.data.value != null) {
-//      for (var element in newCovidEvents.data.value) {
+//      for (final DocumentChange element in newCovidEvents.data.value) {
 //        print(element.doc.data()['building']);
 //      }
 //    }
@@ -40,11 +40,15 @@ final eventsControllerProvider =
 //    }
 //  }
 
+//  print('length of eventsRepository at beginning ');
+//  print(eventsRepository.length);
+
   /// Process [docChanges], there might be [removed] or [added] [docChanges]
   /// TODO (For now not implementing modified elements)
   if (newCovidEvents.data != null) {
     if (newCovidEvents.data.value != null) {
       for (final event in newCovidEvents.data.value) {
+//        print(event.doc.data()['building']);
         if (event.type == DocumentChangeType.added) {
           /// If id is already in repository is a duplicate -> skip!
           if (-1 !=
@@ -56,6 +60,7 @@ final eventsControllerProvider =
 //          print('add');
           eventsRepository.add(
               BuildingEventModel.fromDocumentSnapshot(event.doc, type: true));
+//          print('first name: ${eventsRepository.first.buildingName}');
         } else if (event.type == DocumentChangeType.removed) {
 //          print('remove');
           eventsRepository

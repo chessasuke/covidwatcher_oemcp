@@ -1,13 +1,14 @@
 import 'package:covid_watcher/auth/signin.dart';
 import 'package:covid_watcher/report/search_building.dart';
+import 'package:covid_watcher/report/sent_report_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/home.dart';
 import '../screens/unknown.dart';
 import '../screens_mobile/mobile_news.dart';
-import '../screens_mobile/mobile_report.dart';
-import '../screens_mobile/mobile_settings.dart';
+import '../screens_mobile/screen_report.dart';
+import '../screens_mobile/screen_settings.dart';
 import 'route_path.dart';
 
 class PageManager extends ChangeNotifier {
@@ -61,11 +62,11 @@ class PageManager extends ChangeNotifier {
       }
     }
 
-//    if (uri.pathSegments.length == 1) {
-//      if (uri.pathSegments[0] == 'signin') {
-//        return TheAppPath.signIn();
-//      }
-//    }
+    if (uri.pathSegments.length == 1) {
+      if (uri.pathSegments[0] == 'report_sent') {
+        return TheAppPath.isReportSent();
+      }
+    }
 
     if (uri.pathSegments.length == 1) {
       if (uri.pathSegments[0] == 'search_building') {
@@ -133,18 +134,16 @@ class PageManager extends ChangeNotifier {
           name: '/search_building',
         ),
       );
-    }
-//    else if (configuration.isSignInPage) {
-//      // Handling details screens
-//      _pages.add(
-//        MaterialPage(
-//          child: const SignIn(),
-//          key: UniqueKey(),
-//          name: '/signin',
-//        ),
-//      );
-//    }
-    else if (configuration.isHeatmapPage) {
+    } else if (configuration.isReportSent) {
+      // Handling details screens
+      _pages.add(
+        MaterialPage(
+          child: ReportSentScreen(),
+          key: UniqueKey(),
+          name: '/report_sent',
+        ),
+      );
+    } else if (configuration.isHeatmapPage) {
       // Restoring to MainScreen
       _pages.removeWhere(
         (element) => element.key != const ValueKey('Heatmap'),
@@ -170,9 +169,9 @@ class PageManager extends ChangeNotifier {
     setNewRoutePath(TheAppPath.searchingBuilding());
   }
 
-//  void addSignIn() {
-//    setNewRoutePath(TheAppPath.signIn());
-//  }
+  void addReportSent() {
+    setNewRoutePath(TheAppPath.isReportSent());
+  }
 
   void resetToHome() {
     print('reset to home');

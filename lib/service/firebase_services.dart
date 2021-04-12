@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covid_watcher/models/report_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -65,6 +66,42 @@ final authServiceProvider = Provider<AuthenticationService>((ref) {
 final authStateProvider = StreamProvider.autoDispose<User>((ref) {
   return ref.watch(authServiceProvider).authStateChanges;
 });
+
+/// Send report to Firebase
+
+Future<String> sendReport(ReportModel report) async {
+  print('sending report...');
+
+  print('report building: ${report.buildingVisited}');
+
+  String statusCode = 'error';
+
+  /// Prepare the location of the new case in the DB
+  final CollectionReference covidCol =
+      FirebaseFirestore.instance.collection('covid-cases');
+  String newID = covidCol.doc().id;
+  final DocumentReference newCovidCaseRef = covidCol.doc(newID);
+  print('id: $newID');
+
+  final Map<String, dynamic> data = {
+    'id': newID,
+    'building': report.buildingVisited,
+    'timestamp': report.timestamp,
+    'isVerified': false,
+    'comments': report.comments,
+  };
+
+  /// Send the data to the location
+  try {
+    await newCovidCaseRef.set(data).then((value) => {statusCode = 'success'});
+  } on FirebaseAuthException catch (e) {
+    print('ERROR SENDING REPORT printing e.code: ${e.code}');
+    statusCode = e.message;
+  } catch (e) {
+    print(e);
+  }
+  return statusCode;
+}
 
 /// Fetches User Info from Firestore given UID
 class UserClient {

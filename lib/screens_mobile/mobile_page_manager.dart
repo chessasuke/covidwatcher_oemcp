@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../map/heatMap.dart';
 import 'mobile_news.dart';
-import 'mobile_report.dart';
-import 'mobile_settings.dart';
+import 'screen_report.dart';
+import 'screen_settings.dart';
 
 class MobilePageManager extends StatefulWidget {
   @override

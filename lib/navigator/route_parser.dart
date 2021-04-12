@@ -36,11 +36,9 @@ class TheAppRouteInformationParser extends RouteInformationParser<TheAppPath> {
         return TheAppPath.settings();
       } else if (uri.pathSegments[0] == 'search_building') {
         return TheAppPath.searchingBuilding();
-      }
-//      else if (uri.pathSegments[0] == 'signin') {
-//        return TheAppPath.signIn();
-//      }
-      else {
+      } else if (uri.pathSegments[0] == 'report_sent') {
+        return TheAppPath.isReportSent();
+      } else {
         return TheAppPath.unknown();
       }
     }
@@ -64,9 +62,9 @@ class TheAppRouteInformationParser extends RouteInformationParser<TheAppPath> {
       return const RouteInformation(location: '/settings');
     }
 
-//    if (path.isSignIn) {
-//      return const RouteInformation(location: '/signin');
-//    }
+    if (path.isReportSent) {
+      return const RouteInformation(location: '/report_sent');
+    }
 
     if (path.isSearchBuildingPage) {
       return const RouteInformation(location: '/search_building');

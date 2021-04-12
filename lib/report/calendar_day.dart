@@ -37,7 +37,6 @@ class _CalendarDayState extends State<CalendarDay> {
           if (!widget.isDisable) {
             print(widget.datetime.toString());
             context.read(datePickerProvider).state = widget.datetime;
-            Navigator.pop(context);
           }
         },
         child: Padding(
