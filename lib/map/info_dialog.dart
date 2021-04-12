@@ -14,7 +14,7 @@ class InfoDialog extends StatelessWidget {
           children: const [
             Icon(FontAwesomeIcons.infoCircle),
             SizedBox(width: 20),
-            Text('Information'),
+            Flexible(child: Text('Information')),
           ],
         ),
         children: [
@@ -24,7 +24,10 @@ class InfoDialog extends StatelessWidget {
               children: const [
                 Icon(FontAwesomeIcons.search),
                 SizedBox(width: 10),
-                Text("Search structure by name (or code is available)"),
+                Flexible(
+                    child: Text(
+                        "Search structure by name (or code if available)",
+                        maxLines: 3)),
               ],
             ),
           ),
@@ -34,8 +37,12 @@ class InfoDialog extends StatelessWidget {
               children: const [
                 Icon(FontAwesomeIcons.filter),
                 SizedBox(width: 10),
-                Text(
-                    "Filter covid and sanitation events by date or number of active cases"),
+                Flexible(
+                  child: Text(
+                    "Filter covid and sanitation events by date or number of active cases",
+                    maxLines: 3,
+                  ),
+                ),
               ],
             ),
           ),
@@ -45,7 +52,11 @@ class InfoDialog extends StatelessWidget {
               children: const [
                 Icon(FontAwesomeIcons.solidBuilding),
                 SizedBox(width: 10),
-                Text("Show building markers"),
+                Flexible(
+                    child: Text(
+                  "Show building markers",
+                  maxLines: 3,
+                )),
               ],
             ),
           ),
@@ -55,7 +66,11 @@ class InfoDialog extends StatelessWidget {
               children: const [
                 Icon(FontAwesomeIcons.mapMarkerAlt),
                 SizedBox(width: 10),
-                Text("Show non-building structures markers"),
+                Flexible(
+                    child: Text(
+                  "Show non-building structures markers",
+                  maxLines: 3,
+                )),
               ],
             ),
           ),
@@ -65,7 +80,11 @@ class InfoDialog extends StatelessWidget {
               children: const [
                 Icon(FontAwesomeIcons.replyAll),
                 SizedBox(width: 10),
-                Text("Reset configuration"),
+                Flexible(
+                    child: Text(
+                  "Reset configuration",
+                  maxLines: 3,
+                )),
               ],
             ),
           ),

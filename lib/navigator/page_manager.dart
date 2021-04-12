@@ -1,9 +1,13 @@
+import 'package:covid_watcher/auth/signin.dart';
+import 'package:covid_watcher/report/search_building.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/home.dart';
-import '../screens/settings.dart';
 import '../screens/unknown.dart';
+import '../screens_mobile/mobile_news.dart';
+import '../screens_mobile/mobile_report.dart';
+import '../screens_mobile/mobile_settings.dart';
 import 'route_path.dart';
 
 class PageManager extends ChangeNotifier {
@@ -20,30 +24,60 @@ class PageManager extends ChangeNotifier {
     _pages = [
       MaterialPage(
         child: HomeScreen(),
-        key: const ValueKey('Home'),
-        name: '/',
+        key: const ValueKey('Heatmap'),
+        name: '/heatmap',
       ),
     ];
   }
 
-  /// Handles updating the current path (last page)
+  /// Figures out which is the current path (last page)
   TheAppPath get currentPath {
     Uri uri = Uri.parse(_pages.last.name);
 
+    print('current path: ${uri.path}');
+
     /// Handle '/'
-    if (uri.pathSegments.isEmpty) {
-      return TheAppPath.home();
+    if (uri.pathSegments.length == 1) {
+      if (uri.pathSegments[0] == 'heatmap') {
+        return TheAppPath.heatmap();
+      }
     }
 
-    /// Handle '/settings'
+    if (uri.pathSegments.length == 1) {
+      if (uri.pathSegments[0] == 'news') {
+        return TheAppPath.news();
+      }
+    }
+
+    if (uri.pathSegments.length == 1) {
+      if (uri.pathSegments[0] == 'report') {
+        return TheAppPath.selfReport();
+      }
+    }
+
     if (uri.pathSegments.length == 1) {
       if (uri.pathSegments[0] == 'settings') {
         return TheAppPath.settings();
       }
     }
 
+//    if (uri.pathSegments.length == 1) {
+//      if (uri.pathSegments[0] == 'signin') {
+//        return TheAppPath.signIn();
+//      }
+//    }
+
+    if (uri.pathSegments.length == 1) {
+      if (uri.pathSegments[0] == 'search_building') {
+        return TheAppPath.searchingBuilding();
+      }
+    }
+
     // Handle unknown routes
-    return TheAppPath.unknown();
+    else {
+      print('handling unknown');
+      return TheAppPath.unknown();
+    }
   }
 
   void didPop(dynamic page) {
@@ -53,31 +87,67 @@ class PageManager extends ChangeNotifier {
 
   /// This is where we handle new route information and manage the pages list
   Future<void> setNewRoutePath(TheAppPath configuration) async {
-    print(configuration.isUnknownPage);
-    print(configuration.isSettingsPage);
-
     if (configuration.isUnknownPage) {
-      // Handling 404
       _pages.add(
         MaterialPage(
           child: UnknownScreen(),
-          key: const ValueKey('Unknown'),
+
+          /// ****THIS MUST BE UNIQUE KEY
+          key: UniqueKey(),
           name: '/404',
+        ),
+      );
+    } else if (configuration.isNewsPage) {
+      // Handling details screens
+      _pages.add(
+        MaterialPage(
+          child: NewsTimeline(),
+          key: UniqueKey(),
+          name: '/news',
+        ),
+      );
+    } else if (configuration.isReportPage) {
+      // Handling details screens
+      _pages.add(
+        MaterialPage(
+          child: ScreenReport(),
+          key: UniqueKey(),
+          name: '/report',
         ),
       );
     } else if (configuration.isSettingsPage) {
       // Handling details screens
       _pages.add(
         MaterialPage(
-          child: SettingsScreen(),
-          key: const ValueKey('Settings'),
+          child: ScreenSetting(),
+          key: UniqueKey(),
           name: '/settings',
         ),
       );
-    } else if (configuration.isHomePage) {
+    } else if (configuration.isSearchBuildingPage) {
+      // Handling details screens
+      _pages.add(
+        MaterialPage(
+          child: SearchBuildings(),
+          key: UniqueKey(),
+          name: '/search_building',
+        ),
+      );
+    }
+//    else if (configuration.isSignInPage) {
+//      // Handling details screens
+//      _pages.add(
+//        MaterialPage(
+//          child: const SignIn(),
+//          key: UniqueKey(),
+//          name: '/signin',
+//        ),
+//      );
+//    }
+    else if (configuration.isHeatmapPage) {
       // Restoring to MainScreen
       _pages.removeWhere(
-        (element) => element.key != const ValueKey('Home'),
+        (element) => element.key != const ValueKey('Heatmap'),
       );
     }
     notifyListeners();
@@ -88,8 +158,24 @@ class PageManager extends ChangeNotifier {
     setNewRoutePath(TheAppPath.settings());
   }
 
+  void addNews() {
+    setNewRoutePath(TheAppPath.news());
+  }
+
+  void addReport() {
+    setNewRoutePath(TheAppPath.selfReport());
+  }
+
+  void addSearchingBuilding() {
+    setNewRoutePath(TheAppPath.searchingBuilding());
+  }
+
+//  void addSignIn() {
+//    setNewRoutePath(TheAppPath.signIn());
+//  }
+
   void resetToHome() {
     print('reset to home');
-    setNewRoutePath(TheAppPath.home());
+    setNewRoutePath(TheAppPath.heatmap());
   }
 }

@@ -37,9 +37,16 @@ class _AnimationExampleState extends State<AnimationExample> {
         // artboard.We store a reference to it so we can toggle playback.
         artboard.addController(_controller = SimpleAnimation('animation'));
         setState(() => _riveArtboard = artboard);
-        _controller.isActive = false;
+        _controller.isActive = true;
       },
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
   }
 
   @override

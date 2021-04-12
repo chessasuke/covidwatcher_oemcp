@@ -24,10 +24,10 @@ final covidCasesProvider =
     if (value.runtimeType == QuerySnapshot) {
       QuerySnapshot temp = value;
       newEvents = temp.docChanges.toList();
-      print('newEvents size: ${newEvents.length} | what changed: ');
-      newEvents.forEach((element) {
-        print(element.doc.data()['building']);
-      });
+//      print('newEvents size: ${newEvents.length} | what changed: ');
+//      newEvents.forEach((element) {
+//        print(element.doc.data()['building']);
+//      });
     }
     yield newEvents;
   }

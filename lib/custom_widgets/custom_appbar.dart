@@ -1,3 +1,5 @@
+import 'package:covid_watcher/map/web_menu.dart';
+
 import '../navigator/page_manager.dart';
 import '../theme/theme_toggle.dart';
 import 'package:flutter/material.dart';
@@ -11,16 +13,18 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 50,
       actions: [
+        WebMenu(),
         ToggleBrightness(),
-        IconButton(
-            icon: Icon(FontAwesomeIcons.cog,
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white
-                    : Colors.black),
-            onPressed: () {
-              PageManager.of(context).addSettings();
-            })
+//        IconButton(
+//            icon: Icon(FontAwesomeIcons.cog,
+//                color: Theme.of(context).brightness == Brightness.dark
+//                    ? Colors.white
+//                    : Colors.black),
+//            onPressed: () {
+//              PageManager.of(context).addSettings();
+//            })
       ],
     );
   }

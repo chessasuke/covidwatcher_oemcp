@@ -21,32 +21,57 @@ class TheAppRouteInformationParser extends RouteInformationParser<TheAppPath> {
       RouteInformation routeInformation) async {
     final uri = Uri.parse(routeInformation.location);
 
-    /// Handle '/'
     if (uri.pathSegments.length == 0) {
-      return TheAppPath.home();
+      return TheAppPath.heatmap();
+    } else if (uri.pathSegments.length != 1) {
+      return TheAppPath.unknown();
+    } else {
+      if (uri.pathSegments[0] == 'heatmap') {
+        return TheAppPath.heatmap();
+      } else if (uri.pathSegments[0] == 'news') {
+        return TheAppPath.news();
+      } else if (uri.pathSegments[0] == 'report') {
+        return TheAppPath.selfReport();
+      } else if (uri.pathSegments[0] == 'settings') {
+        return TheAppPath.settings();
+      } else if (uri.pathSegments[0] == 'search_building') {
+        return TheAppPath.searchingBuilding();
+      }
+//      else if (uri.pathSegments[0] == 'signin') {
+//        return TheAppPath.signIn();
+//      }
+      else {
+        return TheAppPath.unknown();
+      }
     }
-
-    /// Handle '/item/:id'
-    if (uri.pathSegments.length == 1) {
-      if (uri.pathSegments[0] == 'settings') return TheAppPath.settings();
-    }
-
-    /// Handle unknown routes
-    return TheAppPath.unknown();
   }
 
   @override
   RouteInformation restoreRouteInformation(TheAppPath path) {
-    if (path.isUnknownPage) {
-      return RouteInformation(location: '/unknown');
+    if (path.isHeatmapPage) {
+      return const RouteInformation(location: '/heatmap');
     }
-    if (path.isHomePage) {
-      return RouteInformation(location: '/');
+
+    if (path.isNewsPage) {
+      return const RouteInformation(location: '/news');
+    }
+
+    if (path.isReportPage) {
+      return const RouteInformation(location: '/report');
     }
 
     if (path.isSettingsPage) {
-      return RouteInformation(location: '/settings');
+      return const RouteInformation(location: '/settings');
     }
-    return null;
+
+//    if (path.isSignIn) {
+//      return const RouteInformation(location: '/signin');
+//    }
+
+    if (path.isSearchBuildingPage) {
+      return const RouteInformation(location: '/search_building');
+    }
+
+    return const RouteInformation(location: '/unknown');
   }
 }

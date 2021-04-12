@@ -50,14 +50,14 @@ final eventsControllerProvider =
           if (-1 !=
               eventsRepository.indexWhere(
                   (element) => event.doc.data()['id'] == element.id)) {
-            print('skipping: ${event.doc.data()['building']}');
+//            print('skipping: ${event.doc.data()['building']}');
             continue;
           }
-          print('add');
+//          print('add');
           eventsRepository.add(
               BuildingEventModel.fromDocumentSnapshot(event.doc, type: true));
         } else if (event.type == DocumentChangeType.removed) {
-          print('remove');
+//          print('remove');
           eventsRepository
               .removeWhere((item) => item.id == event.doc.data()['id']);
         }
@@ -72,14 +72,14 @@ final eventsControllerProvider =
           if (-1 !=
               eventsRepository.indexWhere(
                   (element) => event.doc.data()['id'] == element.id)) {
-            print('skipping: ${event.doc.data()['building']}');
+//            print('skipping: ${event.doc.data()['building']}');
             continue;
           }
-          print('add');
+//          print('add');
           eventsRepository.add(
               BuildingEventModel.fromDocumentSnapshot(event.doc, type: false));
         } else if (event.type == DocumentChangeType.removed) {
-          print('remove');
+//          print('remove');
           eventsRepository
               .removeWhere((item) => item.id == event.doc.data()['id']);
         }

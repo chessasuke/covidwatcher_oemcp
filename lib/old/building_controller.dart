@@ -4,7 +4,7 @@
 //import 'package:flutter_riverpod/flutter_riverpod.dart';
 //
 //import '../data/utd_campus_map_data_v2.dart';
-//import '../heatmap/search_bar.dart';
+//import '../old.heatmap/search_bar.dart';
 //import '../models/building_event_model.dart';
 //import '../models/affected_building_model.dart';
 //import 'covid_case_controller.dart';

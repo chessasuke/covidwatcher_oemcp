@@ -50,7 +50,11 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext thisContext) {
-    return Dialog(
+    return
+//      Scaffold(
+//      backgroundColor: Colors.black,
+//      body:
+        Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
@@ -208,10 +212,7 @@ class _SignInState extends State<SignIn> {
                                           'You have successfully logged in';
                                       loginStringColor = Colors.green;
                                     });
-                                    Future.delayed(Duration(milliseconds: 500),
-                                        () {
-                                      Navigator.pop(thisContext);
-                                    });
+                                    Navigator.pop(thisContext, 'update!');
                                   } else {
                                     /// Scroll to the end to make sure error is displayed to user
                                     if (_scrollController.hasClients) {
@@ -363,6 +364,7 @@ class _SignInState extends State<SignIn> {
           ),
         ),
       ),
+//      ),
     );
   }
 }

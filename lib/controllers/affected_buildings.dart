@@ -40,7 +40,7 @@ final affectedBuildingsProvider =
         int index = buildingNotifier.state.affectedBuildings
             .indexWhere((element) => element.name == tempName);
         if (index != null && index != -1) {
-          print('building exists, adding building event...');
+//          print('building exists, adding building event...');
           buildingNotifier.state.affectedBuildings[index]
               .addBuildingTimeLineEvent(eventRepository[i]);
         }

@@ -48,3 +48,5 @@ final double convertedCenterY = 3892649.5986903203;
 
 final offsetX = 678.4811644330621;
 final offsetY = -899.5897214519791;
+
+const List<String> menu = ['Heatmap', 'News', 'Self-Report', 'Settings'];

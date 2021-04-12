@@ -1,5 +1,5 @@
 //import 'package:covid_watcher/controllers/filterProvider.dart';
-//import 'package:covid_watcher/heatmap/search_bar.dart';
+//import 'package:covid_watcher/old.heatmap/search_bar.dart';
 //import 'package:flutter/cupertino.dart';
 //import 'package:flutter/gestures.dart';
 //import 'package:flutter/material.dart';

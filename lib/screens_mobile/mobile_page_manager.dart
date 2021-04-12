@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-//import '../heatmap/heatMap.dart';
 import '../map/heatMap.dart';
 import 'mobile_news.dart';
 import 'mobile_report.dart';
@@ -18,8 +16,8 @@ class _MobilePageManagerState extends State<MobilePageManager> {
   final List<Widget> _pages = [
     Heatmap(),
     NewsTimeline(),
-    MobileReport(),
-    MobileSettings(),
+    ScreenReport(),
+    ScreenSetting(),
   ];
 
   @override

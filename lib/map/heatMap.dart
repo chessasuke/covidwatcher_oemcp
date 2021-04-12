@@ -1,7 +1,9 @@
-import 'dart:ui';
+//import 'dart:ui';
 
 import 'package:covid_watcher/controllers/affected_buildings.dart';
 import 'package:covid_watcher/map/info_dialog.dart';
+import 'package:covid_watcher/map/web_menu.dart';
+import 'package:covid_watcher/theme/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -139,9 +141,11 @@ class Heatmap extends ConsumerWidget {
       AffectedBuilding temp = AffectedBuilding(
         centroid: Offset(
             (buildingController.affectedBuildings[i].centroid.dx) +
-                (screenSize.width / 2),
+                (screenSize.width / 2) -
+                5,
             (buildingController.affectedBuildings[i].centroid.dy) +
-                ((screenSize.height - bottomBarHeight) / 1.2)),
+                ((screenSize.height - bottomBarHeight) / 1.2) -
+                10),
         name: buildingController.affectedBuildings[i].name,
       )..addBuildingTimeLine(
           buildingController.affectedBuildings[i].buildingTimeline);
@@ -298,7 +302,9 @@ class Heatmap extends ConsumerWidget {
                         }),
                   ],
                 ),
-              ))
+              )),
+          if (!ResponsiveWidget.isMobileScreen(context))
+            Positioned(top: 10, left: 10, child: WebMenu()),
         ]));
   }
 }

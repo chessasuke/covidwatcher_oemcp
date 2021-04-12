@@ -10,6 +10,7 @@ final userProvider = StateNotifierProvider.autoDispose<UserNotifier>((ref) {
   if (userStreamData.data != null) {
     if (userStreamData.data.value != null) {
       if (userStreamData.data.value.uid != null) {
+        print('User Logged In uid: ${userStreamData.data.value.uid}');
         return UserNotifier(uid: userStreamData.data.value.uid);
       }
     }
@@ -29,10 +30,11 @@ class UserNotifier extends StateNotifier<UserState> {
       try {
         state = const UserLoading();
         final userInfo = await UserClient.fetchUserInfo(uid);
+        print('user loaded');
         state =
             UserLoaded(user: UserModel.fromDocumentReference(doc: userInfo));
       } catch (e) {
-        state = const UserError('Error fetching user info');
+        state = const UserError();
       }
     }
 
@@ -71,16 +73,17 @@ class UserLoaded extends UserState {
 }
 
 class UserError extends UserState {
-  final String message;
-  const UserError(this.message);
+//  final String message;
+//  const UserError(this.message);
+  const UserError();
 
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is UserError && o.message == message;
-  }
-
-  @override
-  int get hashCode => message.hashCode;
+//  @override
+//  bool operator ==(Object o) {
+//    if (identical(this, o)) return true;
+//
+//    return o is UserError && o.message == message;
+//  }
+//
+//  @override
+//  int get hashCode => message.hashCode;
 }
