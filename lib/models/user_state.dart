@@ -10,7 +10,7 @@ final userProvider = StateNotifierProvider.autoDispose<UserNotifier>((ref) {
   if (userStreamData.data != null) {
     if (userStreamData.data.value != null) {
       if (userStreamData.data.value.uid != null) {
-        print('User Logged In uid: ${userStreamData.data.value.uid}');
+        print('User Signed In uid: ${userStreamData.data.value.uid}');
         return UserNotifier(uid: userStreamData.data.value.uid);
       }
     }
@@ -35,6 +35,11 @@ class UserNotifier extends StateNotifier<UserState> {
             UserLoaded(user: UserModel.fromDocumentReference(doc: userInfo));
         print('user loaded');
       } catch (e) {
+        /// IF UID DOESNT EXIST IT WILL RETURN ERROR
+        /// be aware that deleting the account must be synchronize,
+        /// the firebase auth with the user info in firestore
+        /// when deleting a firebase user we must delete the corresponding
+        print(e);
         state = const UserError();
       }
     }

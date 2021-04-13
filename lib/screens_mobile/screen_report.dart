@@ -10,19 +10,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../auth/signin.dart';
 import 'package:covid_watcher/models/user_state.dart';
 
-class ScreenReport extends StatefulWidget {
-  @override
-  _ScreenReportState createState() => _ScreenReportState();
-}
-
-class _ScreenReportState extends State<ScreenReport> {
+class ScreenReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
     return SafeArea(child: Scaffold(
         body: SizedBox.expand(child: Consumer(builder: (context, watch, child) {
-      /// TODO Enable user status again after finish the form
       final UserState currentUser = watch(userProvider.state);
 
       return Stack(
@@ -52,18 +46,12 @@ class _ScreenReportState extends State<ScreenReport> {
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
                     child: TextButton(
-                        onPressed: () async {
-                          final response = await showDialog(
+                        onPressed: () {
+                          showDialog(
                               context: context,
                               builder: (context) {
                                 return const SignIn();
                               });
-                          print('response: $response');
-                          if (response.runtimeType == String &&
-                              response == 'update!') {
-                            print('set state');
-                            setState(() {});
-                          }
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),

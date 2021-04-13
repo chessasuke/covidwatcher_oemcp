@@ -7,21 +7,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 final buildingsAffectedSelected = StateProvider<List<String>>((ref) => []);
 
-class CustomBuildingFinder extends ConsumerWidget {
+class CustomBuildingFinder extends StatelessWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
       final List<String> buildingsSelected =
           watch(buildingsAffectedSelected).state;
 
-      print('buildingsSelected: ${buildingsSelected.length}');
+      print(buildingsSelected.length);
 
       return Container(
         child: buildingsSelected.isEmpty
             ? GestureDetector(
-                onTap: () {
-                  PageManager.of(context).addSearchingBuilding();
-                },
+                onTap: () => showDialog(
+                    context: context, builder: (context) => SearchBuildings()),
                 child: Row(
                   children: const [
                     Flexible(
@@ -36,22 +35,24 @@ class CustomBuildingFinder extends ConsumerWidget {
                   ],
                 ),
               )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Flexible(
-                      child: Text(
-                    buildingsSelected.join(", "),
-                  )),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
-                    child: GestureDetector(
-                        onTap: () =>
-                            PageManager.of(context).addSearchingBuilding(),
-                        child:
-                            const Icon(FontAwesomeIcons.solidEdit, size: 20)),
-                  )
-                ],
+            : Flexible(
+                child: GestureDetector(
+                  onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => SearchBuildings()),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        buildingsSelected.join(", "),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 4.0),
+                        child: Icon(FontAwesomeIcons.solidEdit, size: 20),
+                      )
+                    ],
+                  ),
+                ),
               ),
       );
     });

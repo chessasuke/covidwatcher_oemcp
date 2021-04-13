@@ -1,9 +1,9 @@
-import 'package:covid_watcher/service/firebase_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../service/firebase_services.dart';
 import '../theme/adabtableFontSize.dart';
 import 'auth_logic.dart';
 import 'reset_password.dart';
@@ -50,11 +50,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext thisContext) {
-    return
-//      Scaffold(
-//      backgroundColor: Colors.black,
-//      body:
-        Dialog(
+    return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
@@ -262,6 +258,7 @@ class _SignInState extends State<SignIn> {
                           children: [
                             /// Reset Pass
                             Flexible(
+                              flex: 2,
                               child: InkWell(
                                 onTap: () async {
                                   if (AuthenticationService.validateEmail(
@@ -300,7 +297,7 @@ class _SignInState extends State<SignIn> {
                                 },
                                 child: Text(Strings.resetPass,
                                     overflow: TextOverflow.clip,
-                                    maxLines: 2,
+                                    maxLines: 3,
                                     style: Theme.of(context)
                                         .primaryTextTheme
                                         .bodyText2
@@ -322,6 +319,7 @@ class _SignInState extends State<SignIn> {
 
                             /// Create Acc
                             Flexible(
+                              flex: 2,
                               child: InkWell(
                                 onTap: () {
                                   showDialog(
@@ -364,7 +362,6 @@ class _SignInState extends State<SignIn> {
           ),
         ),
       ),
-//      ),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:covid_watcher/models/building_event_model.dart';
+import '../models/building_event_model.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:covid_watcher/map/dropdown_date_filter.dart';
+import '../map/dropdown_date_filter.dart';
 import '../models/building_event_model.dart';
 import '../service/firebase_services.dart';
 
@@ -40,9 +40,6 @@ final eventsControllerProvider =
 //    }
 //  }
 
-//  print('length of eventsRepository at beginning ');
-//  print(eventsRepository.length);
-
   /// Process [docChanges], there might be [removed] or [added] [docChanges]
   /// TODO (For now not implementing modified elements)
   if (newCovidEvents.data != null) {
@@ -77,14 +74,11 @@ final eventsControllerProvider =
           if (-1 !=
               eventsRepository.indexWhere(
                   (element) => event.doc.data()['id'] == element.id)) {
-//            print('skipping: ${event.doc.data()['building']}');
             continue;
           }
-//          print('add');
           eventsRepository.add(
               BuildingEventModel.fromDocumentSnapshot(event.doc, type: false));
         } else if (event.type == DocumentChangeType.removed) {
-//          print('remove');
           eventsRepository
               .removeWhere((item) => item.id == event.doc.data()['id']);
         }

@@ -1,10 +1,11 @@
-import 'package:covid_watcher/report/calendar_day.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+
+import 'calendar_day.dart';
 
 final datePickerProvider = StateProvider<DateTime>((ref) => DateTime.now());
 final timePickerProvider = StateProvider<TimeOfDay>((ref) => TimeOfDay.now());
@@ -38,7 +39,7 @@ class CustomDatePicker extends ConsumerWidget {
             isDisable: isDisable,
           ),
         );
-        iterator = iterator.add(Duration(days: 1));
+        iterator = iterator.add(const Duration(days: 1));
       }
       calendar.add(Row(children: row));
     }

@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covid_watcher/models/notification_model.dart';
 import 'package:covid_watcher/models/report_model.dart';
+import 'package:covid_watcher/models/user_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -102,6 +104,25 @@ Future<String> sendReport(ReportModel report) async {
   }
   return statusCode;
 }
+
+final notificationsProvider = FutureProvider.autoDispose((ref) async {
+  final UserState userState = ref.watch(userProvider.state);
+  if (userState is UserLoaded) {
+    ref.maintainState = true;
+    try {
+      final DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('notification')
+          .doc(userState.getUser.getUid)
+          .get();
+      return NotificationModel.fromDocumentSnapshot(doc);
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  } else {
+    return null;
+  }
+});
 
 /// Fetches User Info from Firestore given UID
 class UserClient {

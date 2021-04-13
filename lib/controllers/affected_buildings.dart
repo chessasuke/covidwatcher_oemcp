@@ -12,6 +12,8 @@ import '../models/affected_building_model.dart';
 
 final affectedBuildingsProvider =
     StateNotifierProvider.autoDispose<BuildingNotifier>((ref) {
+  print('affected building provider');
+
   /// A list of new events
   final eventRepository = ref.watch(eventsControllerProvider).state;
 

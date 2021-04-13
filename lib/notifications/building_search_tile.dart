@@ -1,26 +1,29 @@
-import 'package:covid_watcher/report/building_finder.dart';
+import 'package:covid_watcher/service/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BuildingTile extends StatelessWidget {
-  BuildingTile({this.name});
+final notifierBuildingsSelected =
+    StateProvider.autoDispose<List<String>>((ref) => []);
+
+class BuildingSearchTile extends StatelessWidget {
+  BuildingSearchTile({this.name});
   final String name;
 
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final buildingsSelected = watch(buildingsAffectedSelected).state;
+      final buildingsSelected = watch(notifierBuildingsSelected).state;
       return ListTile(
         title: Text(name),
         onTap: () {
-          if (!context.read(buildingsAffectedSelected).state.contains(name)) {
-            final state = context.read(buildingsAffectedSelected);
+          if (!context.read(notifierBuildingsSelected).state.contains(name)) {
+            final state = context.read(notifierBuildingsSelected);
             state.state = [...state.state, name];
           } else {
-            List<String> temp = context.read(buildingsAffectedSelected).state;
+            List<String> temp = context.read(notifierBuildingsSelected).state;
             temp.remove(name);
-            final state = context.read(buildingsAffectedSelected);
+            final state = context.read(notifierBuildingsSelected);
             state.state = temp;
           }
         },

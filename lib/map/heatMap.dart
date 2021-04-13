@@ -165,8 +165,6 @@ class Heatmap extends ConsumerWidget {
     final showStructureMarker = watch(showStructureMarkerProvider).state;
     final showSearchBar = watch(showSearchBarProvider).state;
 
-//    var filterName = watch(filterNameProvider).state;
-
     final buildings = watch(buildingProvider);
     final affectedBuildings = watch(affectedBuildingsProvider);
 

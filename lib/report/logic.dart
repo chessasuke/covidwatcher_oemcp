@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covid_watcher/models/report_model.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 List<ReportModel> preprocessReports(String name, String email, String comments,
     DateTime date, TimeOfDay time, List<String> buildings) {

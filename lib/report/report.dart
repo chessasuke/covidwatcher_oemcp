@@ -18,7 +18,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReportForm extends ConsumerWidget {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
@@ -55,7 +55,7 @@ class ReportForm extends ConsumerWidget {
                       width: !ResponsiveWidget.isMobileScreen(context)
                           ? screenSize.width * 0.7
                           : screenSize.width,
-                      constraints: BoxConstraints(maxHeight: 250),
+                      constraints: const BoxConstraints(maxHeight: 250),
                       child: Stack(
                         children: [
                           Positioned(
@@ -82,7 +82,7 @@ class ReportForm extends ConsumerWidget {
                   ),
 
                   /// DIVIDER
-                  DividerCustom(),
+                  const DividerCustom(),
 
                   /// NAME + EMAIL
                   if (!ResponsiveWidget.isMobileScreen(context))
@@ -119,7 +119,10 @@ class ReportForm extends ConsumerWidget {
 
                   /// DIVIDER
                   const SizedBox(height: 10),
-                  DividerCustom(),
+                  const DividerCustom(),
+
+                  /// TODO For mobile change this to the built in widget
+                  /// for web keep this one
 
                   /// DATE OF VISIT
                   const Padding(

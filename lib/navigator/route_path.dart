@@ -70,66 +70,17 @@ class TheAppPath {
         isSearchingBuilding = false,
         isNews = false;
 
-  bool get isHeatmapPage =>
-      isHeatmap == true &&
-      isSettings == false &&
-      isNews == false &&
-      isSelfReport == false &&
-      isReportSent == false &&
-      isSearchingBuilding == false &&
-      isUnknown == false;
+  bool get isHeatmapPage => isHeatmap == true;
 
-  bool get isSettingsPage =>
-      isSettings == true &&
-      isHeatmap == false &&
-      isNews == false &&
-      isReportSent == false &&
-      isSelfReport == false &&
-      isSearchingBuilding == false &&
-      isUnknown == false;
+  bool get isSettingsPage => isSettings == true;
 
-  bool get isNewsPage =>
-      isNews == true &&
-      isSettings == false &&
-      isHeatmap == false &&
-      isReportSent == false &&
-      isSelfReport == false &&
-      isSearchingBuilding == false &&
-      isUnknown == false;
+  bool get isNewsPage => isNews == true;
 
-  bool get isReportPage =>
-      isSelfReport == true &&
-      isSettings == false &&
-      isNews == false &&
-      isHeatmap == false &&
-      isReportSent == false &&
-      isSearchingBuilding == false &&
-      isUnknown == false;
+  bool get isReportPage => isSelfReport == true;
 
-  bool get isUnknownPage =>
-      isUnknown == true &&
-      isSettings == false &&
-      isNews == false &&
-      isSelfReport == false &&
-      isSearchingBuilding == false &&
-      isReportSent == false &&
-      isHeatmap == false;
+  bool get isUnknownPage => isUnknown == true;
 
-  bool get isSearchBuildingPage =>
-      isSearchingBuilding == true &&
-      isUnknown == false &&
-      isSettings == false &&
-      isNews == false &&
-      isSelfReport == false &&
-      isReportSent == false &&
-      isHeatmap == false;
+  bool get isSearchBuildingPage => isSearchingBuilding == true;
 
-  bool get isReportSentPage =>
-      isReportSent == true &&
-      isSearchingBuilding == false &&
-      isUnknown == false &&
-      isSettings == false &&
-      isNews == false &&
-      isSelfReport == false &&
-      isHeatmap == false;
+  bool get isReportSentPage => isReportSent == true;
 }
