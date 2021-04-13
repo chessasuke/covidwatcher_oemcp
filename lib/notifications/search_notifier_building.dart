@@ -45,41 +45,53 @@ class SearchNotifierBuildings extends StatelessWidget {
                           IconButton(
                               icon: const Icon(FontAwesomeIcons.check),
                               onPressed: () async {
-                                String statusCode = 'ok';
-                                String uid;
-                                final currentUser =
-                                    context.read(userProvider.state);
-                                if (currentUser is UserLoaded) {
-                                  context.read(loadingProvider).state = true;
-                                  uid = currentUser.user.getUid;
-                                  for (String building in context
-                                      .read(notifierBuildingsSelected)
-                                      .state) {
-                                    statusCode = await updateNotifierBuilding(
-                                        building, uid);
-                                    if (statusCode != 'ok') break;
+                                if (context
+                                    .read(notifierBuildingsSelected)
+                                    .state
+                                    .isNotEmpty) {
+                                  print('new buildings selected');
+
+                                  String statusCode = 'ok';
+                                  String uid;
+                                  final currentUser =
+                                      context.read(userProvider.state);
+                                  if (currentUser is UserLoaded) {
+                                    context.read(loadingProvider).state = true;
+                                    uid = currentUser.user.getUid;
+                                    for (String building in context
+                                        .read(notifierBuildingsSelected)
+                                        .state) {
+                                      statusCode = await updateNotifierBuilding(
+                                          building, uid);
+                                      if (statusCode != 'ok') break;
+                                    }
+                                    context.read(loadingProvider).state = false;
                                   }
-                                  context.read(loadingProvider).state = false;
-                                }
-                                if (statusCode != 'ok') {
-                                  await showDialog(
-                                      context: context,
-                                      builder: (context) => const AlertDialog(
-                                            title: Text('Error'),
-                                            actions: [Text('Operation Failed')],
-                                          ));
+                                  if (statusCode != 'ok') {
+                                    await showDialog(
+                                        context: context,
+                                        builder: (context) => const AlertDialog(
+                                              title: Text('Error'),
+                                              actions: [
+                                                Text('Operation Failed')
+                                              ],
+                                            ));
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            backgroundColor: Colors.transparent
+                                                .withOpacity(0.7),
+                                            elevation: 50,
+                                            content: const Text(
+                                              'Notifications Updated',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )));
+                                    await context
+                                        .refresh(notificationsProvider);
+                                  }
                                 } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          backgroundColor: Colors.transparent
-                                              .withOpacity(0.7),
-                                          elevation: 50,
-                                          content: const Text(
-                                            'Notifications Updated',
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          )));
-                                  await context.refresh(notificationsProvider);
+                                  print('no buildings selected');
                                 }
 
                                 Navigator.pop(context);
@@ -88,7 +100,12 @@ class SearchNotifierBuildings extends StatelessWidget {
                           const Text('Search Building',
                               style: TextStyle(fontSize: 24)),
                           const SizedBox(width: 20),
-                          const Icon(FontAwesomeIcons.solidBuilding)
+                          Align(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  icon: const Icon(
+                                      FontAwesomeIcons.solidTimesCircle)))
                         ],
                       ),
 

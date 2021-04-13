@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+/// To select a tile in the search notifier building dialog
+/// and display the check mark
+///
 final notifierBuildingsSelected =
     StateProvider.autoDispose<List<String>>((ref) => []);
 

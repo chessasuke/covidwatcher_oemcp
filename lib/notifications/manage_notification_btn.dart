@@ -18,7 +18,6 @@ class ManageNotficationBtn extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final screenSize = MediaQuery.of(context).size;
     final isOpen = watch(isNotificationOpen).state;
-//    final notifierBuildings = watch(notifierBuildingProvider).state;
 
     final notifierBuilding = watch(notificationsProvider);
 
