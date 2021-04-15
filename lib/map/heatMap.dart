@@ -1,5 +1,3 @@
-//import 'dart:ui';
-
 import 'package:covid_watcher/controllers/affected_buildings.dart';
 import 'package:covid_watcher/map/info_dialog.dart';
 import 'package:covid_watcher/map/web_menu.dart';

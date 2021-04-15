@@ -1,14 +1,13 @@
-import 'package:covid_watcher/auth/signin.dart';
-import 'package:covid_watcher/report/search_building.dart';
-import 'package:covid_watcher/report/sent_report_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../report/search_building.dart';
 import '../screens/home.dart';
+import '../screens/mobile_news.dart';
+import '../screens/screen_report.dart';
+import '../screens/screen_settings.dart';
+import '../screens/sent_report_screen.dart';
 import '../screens/unknown.dart';
-import '../screens_mobile/mobile_news.dart';
-import '../screens_mobile/screen_report.dart';
-import '../screens_mobile/screen_settings.dart';
 import 'route_path.dart';
 
 class PageManager extends ChangeNotifier {

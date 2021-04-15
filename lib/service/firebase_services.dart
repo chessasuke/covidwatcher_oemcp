@@ -87,6 +87,44 @@ Future<String> sendReport(ReportModel report) async {
 
   final Map<String, dynamic> data = {
     'id': newID,
+    'userName': report.name,
+    'userEmail': report.email,
+    'building': report.buildingVisited,
+    'timestamp': report.timestamp,
+    'isVerified': false,
+    'comments': report.comments,
+  };
+
+  /// Send the data to the location
+  try {
+    await newCovidCaseRef.set(data).then((value) => {statusCode = 'success'});
+  } on FirebaseAuthException catch (e) {
+    print('ERROR SENDING REPORT printing e.code: ${e.code}');
+    statusCode = e.message;
+  } catch (e) {
+    print(e);
+  }
+  return statusCode;
+}
+
+Future<String> sendVisitorReport(ReportModel report) async {
+  print('sending report...');
+
+  print('report building: ${report.buildingVisited}');
+
+  String statusCode = 'error';
+
+  /// Prepare the location of the new case in the DB
+  final CollectionReference covidCol =
+      FirebaseFirestore.instance.collection('visitor-covid-cases');
+  String newID = covidCol.doc().id;
+  final DocumentReference newCovidCaseRef = covidCol.doc(newID);
+  print('id: $newID');
+
+  final Map<String, dynamic> data = {
+    'id': newID,
+    'userName': report.name,
+    'userEmail': report.email,
     'building': report.buildingVisited,
     'timestamp': report.timestamp,
     'isVerified': false,

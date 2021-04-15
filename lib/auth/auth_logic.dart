@@ -26,6 +26,21 @@ class AuthenticationService {
     return null;
   }
 
+  static String validateCompleteEmail(String value) {
+    RegExp regExp = RegExp(
+        r'^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$');
+
+    if (value != null) {
+      value = value.trim();
+      if (value.isEmpty) {
+        return 'Email can\'t be empty';
+      } else if (!regExp.hasMatch(value)) {
+        return 'Email bad format';
+      }
+    }
+    return null;
+  }
+
   // ignore: public_member_api_docs
   static bool isEmailError(String text) {
     if (AuthenticationService.validateEmail(text) == 'Email bad format') {

@@ -1,12 +1,12 @@
 import 'package:covid_watcher/models/user_state.dart';
 import 'package:covid_watcher/notifications/logic_notification.dart';
 import 'package:covid_watcher/providers/loading_provider.dart';
+import 'package:covid_watcher/screens/screen_settings.dart';
 import 'package:covid_watcher/service/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'building_search_tile.dart';
-import 'package:covid_watcher/screens_mobile/screen_settings.dart';
 
 /// Tiles that appear in the manage notification section with
 /// the Buildings for which we are subscribed to receive notifications

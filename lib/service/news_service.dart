@@ -1,7 +1,7 @@
-import 'package:dio/dio.dart' as dio;
 import 'package:http/http.dart' as http;
-import '../constants.dart';
 import 'package:intl/intl.dart';
+
+import '../constants.dart';
 
 class NewsService {
   static Future<String> sendRequest(

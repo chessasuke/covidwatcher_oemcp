@@ -1,4 +1,3 @@
-import 'package:covid_watcher/navigator/page_manager.dart';
 import 'package:covid_watcher/report/search_building.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

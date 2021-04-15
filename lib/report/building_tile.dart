@@ -1,7 +1,8 @@
-import 'package:covid_watcher/report/building_finder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'building_finder.dart';
 
 class BuildingTile extends StatelessWidget {
   BuildingTile({this.name});

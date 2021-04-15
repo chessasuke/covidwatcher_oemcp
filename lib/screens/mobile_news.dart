@@ -15,7 +15,6 @@ import '../auth/auth_logic.dart';
 import '../constants.dart';
 import '../controllers/news_controller.dart';
 import '../models/news_model.dart';
-import '../theme/adabtableFontSize.dart';
 
 class NewsTimeline extends ConsumerWidget {
   @override
@@ -26,7 +25,7 @@ class NewsTimeline extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
 //        appBar: CustomAppBar(),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         body: Stack(
           children: [
 //            Container(

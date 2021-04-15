@@ -1,5 +1,4 @@
 import 'package:covid_watcher/notifications/building_notify_tile.dart';
-import 'package:covid_watcher/notifications/building_search_tile.dart';
 import 'package:covid_watcher/notifications/search_notifier_building.dart';
 import 'package:covid_watcher/service/firebase_services.dart';
 import 'package:flutter/material.dart';

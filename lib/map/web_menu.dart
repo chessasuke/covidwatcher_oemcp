@@ -1,7 +1,8 @@
-import 'package:covid_watcher/constants.dart';
-import 'package:covid_watcher/map/web_menu_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../constants.dart';
+import 'web_menu_item.dart';
 
 class WebMenu extends StatelessWidget {
   @override
