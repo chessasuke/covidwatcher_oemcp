@@ -50,3 +50,9 @@ final offsetX = 678.4811644330621;
 final offsetY = -899.5897214519791;
 
 const List<String> menu = ['Heatmap', 'News', 'Self-Report', 'Settings'];
+
+const String OEMCP_SELF_REPORT_URL =
+    'https://veoci.com/veoci/p/form/tqeyzbbexcyf?c=131560#tab=entryForm';
+
+const String OEMCP_VACCINE_REPORT_URL =
+    'https://veoci.com/veoci/p/form/tqeyzbbexcyf?c=131560#tab=entryForm';

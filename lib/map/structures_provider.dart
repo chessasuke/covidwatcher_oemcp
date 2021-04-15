@@ -1,6 +1,6 @@
 import 'package:covid_watcher/data/coord3.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'heatMap.dart';
+import 'heatmap_widget.dart';
 import 'structure_model.dart';
 import '../data/buildingCenters.dart';
 import '../data/buildingName.dart';

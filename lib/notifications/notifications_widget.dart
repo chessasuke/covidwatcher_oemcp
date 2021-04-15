@@ -4,6 +4,8 @@ import 'package:covid_watcher/service/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// NOTIFICATION WIDGET, this goes directly in screen settings
+
 class NotificationWidget extends StatelessWidget {
   const NotificationWidget({@required this.currentUser});
   final UserModel currentUser;
@@ -48,7 +50,6 @@ class NotificationWidget extends StatelessWidget {
             const SizedBox(),
             Flexible(
               child: Container(
-//                              constraints: const BoxConstraints(maxWidth: 150),
                 decoration: BoxDecoration(
                   color: Theme.of(context).buttonColor.withOpacity(0.7),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),

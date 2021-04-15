@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:covid_watcher/map/heatMap.dart';
+import 'package:covid_watcher/notifications/manage_notification_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,8 +12,9 @@ import '../data/buildingName.dart';
 import '../models/user_state.dart';
 import '../notifications/building_search_tile.dart';
 import '../providers/loading_provider.dart';
-import '../service/firebase_services.dart';
-import 'logic_notification.dart';
+import '../service/local_service.dart';
+
+/// Dialog that popups to search buildings and add them to notification settings
 
 final buildingsResults = StateProvider<List<String>>((ref) => []);
 
@@ -49,22 +52,22 @@ class SearchNotifierBuildings extends StatelessWidget {
                                     .read(notifierBuildingsSelected)
                                     .state
                                     .isNotEmpty) {
-                                  print('new buildings selected');
-
+                                  print('save new buildings');
                                   String statusCode = 'ok';
-                                  String uid;
                                   final currentUser =
                                       context.read(userProvider.state);
                                   if (currentUser is UserLoaded) {
                                     context.read(loadingProvider).state = true;
-                                    uid = currentUser.user.getUid;
-                                    for (String building in context
-                                        .read(notifierBuildingsSelected)
-                                        .state) {
-                                      statusCode = await updateNotifierBuilding(
-                                          building, uid);
-                                      if (statusCode != 'ok') break;
-                                    }
+
+                                    ///TODO OEMCP version
+                                    /// save to shared preference and to a state provider
+                                    statusCode = await setNotifierBuildings(
+                                        context
+                                            .read(notifierBuildingsSelected)
+                                            .state);
+                                    await context
+                                        .refresh(bookmarkedBuidlingsProvider);
+
                                     context.read(loadingProvider).state = false;
                                   }
                                   if (statusCode != 'ok') {
@@ -87,8 +90,6 @@ class SearchNotifierBuildings extends StatelessWidget {
                                               style: TextStyle(
                                                   color: Colors.white),
                                             )));
-                                    await context
-                                        .refresh(notificationsProvider);
                                   }
                                 } else {
                                   print('no buildings selected');

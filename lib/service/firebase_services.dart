@@ -143,24 +143,87 @@ Future<String> sendVisitorReport(ReportModel report) async {
   return statusCode;
 }
 
-final notificationsProvider = FutureProvider.autoDispose((ref) async {
-  final UserState userState = ref.watch(userProvider.state);
-  if (userState is UserLoaded) {
-    ref.maintainState = true;
-    try {
-      final DocumentSnapshot doc = await FirebaseFirestore.instance
-          .collection('notification')
-          .doc(userState.getUser.getUid)
-          .get();
-      return NotificationModel.fromDocumentSnapshot(doc);
-    } catch (e) {
-      print('error: $e');
-      return NotificationModel.fromDocumentSnapshot(null);
-    }
-  } else {
-    return null;
-  }
-});
+//final AutoDisposeFutureProvider<NotificationModel> notificationsProvider =
+//    FutureProvider.autoDispose<NotificationModel>((ref) async {
+//  final UserState userState = ref.watch(userProvider.state);
+//  if (userState is UserLoaded) {
+//    ref.maintainState = true;
+//    NotificationModel notificationModel;
+//    await FirebaseFirestore.instance
+//        .collection('notification')
+//        .doc(userState.getUser.getUid)
+//        .get()
+//        .then((value) {
+//      if (value.exists) {
+//        print('exists');
+//        notificationModel = NotificationModel.fromDocumentSnapshot(value);
+//      } else {
+//        print('returning empty');
+//        notificationModel = NotificationModel.fromDocumentSnapshot(null);
+//      }
+//    });
+//    return notificationModel;
+//  } else {
+//    return null;
+//  }
+//});
+
+//Future<String> updateNotifierBuilding(String building, String uid) async {
+//  String statusCode = 'error';
+//
+//  if (building == null || uid == null) return 'building and uid cannot be null';
+//
+//  print('update notification...');
+//  print('subscribe to: $building');
+//
+//  /// Prepare the location of the new case in the DB
+//  final CollectionReference notificationColl =
+//      FirebaseFirestore.instance.collection('notification');
+//  final DocumentReference notificationDocRef = notificationColl.doc(uid);
+//
+//  final Map<String, dynamic> data = {
+//    building: null,
+//  };
+//
+//  /// Send the data to the location
+//  try {
+//    await notificationDocRef
+//        .set(data, SetOptions(merge: true))
+//        .then((value) => {statusCode = 'ok'});
+//  } on FirebaseAuthException catch (e) {
+//    print('ERROR UPDATING NOTIFICATIONS printing e.code: ${e.code}');
+//    statusCode = e.message;
+//  } catch (e) {
+//    print(e);
+//  }
+//  return statusCode;
+//}
+//
+//Future<String> removeNotifierBuilding(String building, String uid) async {
+//  String statusCode = 'error';
+//
+//  if (building == null || uid == null) return 'building and uid cannot be null';
+//
+//  print('update notification...');
+//  print('unsubscribe from: $building');
+//
+//  /// get the location in the DB
+//  final CollectionReference notificationColl =
+//      FirebaseFirestore.instance.collection('notification');
+//  final DocumentReference notificationDocRef = notificationColl.doc(uid);
+//
+//  /// Delete the field
+//  try {
+//    await notificationDocRef.update({building: FieldValue.delete()}).then(
+//        (value) => {statusCode = 'ok'});
+//  } on FirebaseAuthException catch (e) {
+//    print('ERROR UPDATING NOTIFICATIONS printing e.code: ${e.code}');
+//    statusCode = e.message;
+//  } catch (e) {
+//    print(e);
+//  }
+//  return statusCode;
+//}
 
 /// Fetches User Info from Firestore given UID
 class UserClient {

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../report/search_building.dart';
 import '../screens/home.dart';
 import '../screens/mobile_news.dart';
 import '../screens/screen_report.dart';
 import '../screens/screen_settings.dart';
-import '../screens/sent_report_screen.dart';
 import '../screens/unknown.dart';
 import 'route_path.dart';
 
@@ -61,18 +59,6 @@ class PageManager extends ChangeNotifier {
       }
     }
 
-    if (uri.pathSegments.length == 1) {
-      if (uri.pathSegments[0] == 'report_sent') {
-        return TheAppPath.isReportSent();
-      }
-    }
-
-    if (uri.pathSegments.length == 1) {
-      if (uri.pathSegments[0] == 'search_building') {
-        return TheAppPath.searchingBuilding();
-      }
-    }
-
     // Handle unknown routes
     else {
       print('handling unknown');
@@ -124,24 +110,6 @@ class PageManager extends ChangeNotifier {
           name: '/settings',
         ),
       );
-    } else if (configuration.isSearchBuildingPage) {
-      // Handling details screens
-      _pages.add(
-        MaterialPage(
-          child: SearchBuildings(),
-          key: UniqueKey(),
-          name: '/search_building',
-        ),
-      );
-    } else if (configuration.isReportSent) {
-      // Handling details screens
-      _pages.add(
-        MaterialPage(
-          child: ReportSentScreen(),
-          key: UniqueKey(),
-          name: '/report_sent',
-        ),
-      );
     } else if (configuration.isHeatmapPage) {
       // Restoring to MainScreen
       _pages.removeWhere(
@@ -162,14 +130,6 @@ class PageManager extends ChangeNotifier {
 
   void addReport() {
     setNewRoutePath(TheAppPath.selfReport());
-  }
-
-  void addSearchingBuilding() {
-    setNewRoutePath(TheAppPath.searchingBuilding());
-  }
-
-  void addReportSent() {
-    setNewRoutePath(TheAppPath.isReportSent());
   }
 
   void resetToHome() {

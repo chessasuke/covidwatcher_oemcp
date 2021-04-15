@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+/// Widget represents a building result in the search building page
 /// To select a tile in the search notifier building dialog
 /// and display the check mark
-///
+
+/// Buildings selected when user open the search page
 final notifierBuildingsSelected =
     StateProvider.autoDispose<List<String>>((ref) => []);
 

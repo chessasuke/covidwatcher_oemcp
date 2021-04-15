@@ -15,8 +15,10 @@ final eventsControllerProvider =
   /// A list of new covid events
   final newCovidEvents = ref.watch(covidCasesProvider);
 
+  ///*********** NEW VERSION OF OEMCP DOESNT INCLUDE SANITATION*************
+  ///
   /// A list of new sanitation events
-  final newSanitationEvents = ref.watch(sanitationCasesProvider);
+//  final newSanitationEvents = ref.watch(sanitationCasesProvider);
 
   /// Repository to store the [BuildingEvent]s
   final eventsRepository = ref.watch(eventRepositoryProvider).state;
@@ -66,24 +68,26 @@ final eventsControllerProvider =
     }
   }
 
-  if (newSanitationEvents.data != null) {
-    if (newSanitationEvents.data.value != null) {
-      for (final event in newSanitationEvents.data.value) {
-        if (event.type == DocumentChangeType.added) {
-          if (-1 !=
-              eventsRepository.indexWhere(
-                  (element) => event.doc.data()['id'] == element.id)) {
-            continue;
-          }
-          eventsRepository.add(
-              BuildingEventModel.fromDocumentSnapshot(event.doc, type: false));
-        } else if (event.type == DocumentChangeType.removed) {
-          eventsRepository
-              .removeWhere((item) => item.id == event.doc.data()['id']);
-        }
-      }
-    }
-  }
+  ///*********** NEW VERSION OF OEMCP DOESNT INCLUDE SANITATION*************
+
+//  if (newSanitationEvents.data != null) {
+//    if (newSanitationEvents.data.value != null) {
+//      for (final event in newSanitationEvents.data.value) {
+//        if (event.type == DocumentChangeType.added) {
+//          if (-1 !=
+//              eventsRepository.indexWhere(
+//                  (element) => event.doc.data()['id'] == element.id)) {
+//            continue;
+//          }
+//          eventsRepository.add(
+//              BuildingEventModel.fromDocumentSnapshot(event.doc, type: false));
+//        } else if (event.type == DocumentChangeType.removed) {
+//          eventsRepository
+//              .removeWhere((item) => item.id == event.doc.data()['id']);
+//        }
+//      }
+//    }
+//  }
 
   /// Filter by Date
   final filter = ref.watch(filterDateProvider).state;

@@ -5,8 +5,9 @@ class NotificationModel {
   List<String> buildingsSubscribed;
 
   factory NotificationModel.fromDocumentSnapshot(DocumentSnapshot doc) {
+    print('is empty: ${doc.data().isEmpty}');
     return NotificationModel(
         buildingsSubscribed:
-            doc.data().keys.toList() != null ? doc.data().keys.toList() : []);
+            doc.data() != null ? doc.data().keys.toList() : []);
   }
 }

@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../auth/signin.dart';
 import '../map/web_menu.dart';
 import '../models/user_state.dart';
-import '../notifications/notifications.dart';
+import '../notifications/notifications_widget.dart';
 import '../providers/loading_provider.dart';
 import '../theme/responsive.dart';
 
@@ -149,7 +149,7 @@ class ScreenSetting extends ConsumerWidget {
                               const Padding(
                                 padding: EdgeInsets.only(bottom: 16.0, top: 8),
                                 child: Text(
-                                    'Please sign in to manage your profile'),
+                                    'Please sign in to manage your notifications'),
                               ),
                             ],
                           ),
