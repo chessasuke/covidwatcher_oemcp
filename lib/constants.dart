@@ -50,6 +50,3 @@ final offsetX = 678.4811644330621;
 final offsetY = -899.5897214519791;
 
 const List<String> menu = ['Heatmap', 'News', 'Self-Report', 'Settings'];
-
-const String VAPID =
-    'BMY8RFTx4Kl8_-J5p6IMUMeV-WkQ0NvMet_kajVLIcUNetZp01PWkpm6N9wGbecWeLxQsAU1I1c0jddG5hEbdJg';
