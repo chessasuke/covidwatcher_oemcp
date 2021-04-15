@@ -21,116 +21,121 @@ class ManageNotficationBtn extends ConsumerWidget {
     final notifierBuilding = watch(notificationsProvider);
 
     return notifierBuilding.when(
-        data: (data) => isOpen
-            ? Container(
-                color: Theme.of(context).cardColor.withOpacity(0.2),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).buttonColor.withOpacity(
-                              0.7), //                color: Color(0xEB3A60),
-                          border: Border(
-                            top: BorderSide(
-                                color: Theme.of(context).dividerColor),
-                            bottom: BorderSide(
-                                color: Theme.of(context).dividerColor),
-                          )),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextButton(
-                          onPressed: () {
-                            final currentState =
-                                context.read(isNotificationOpen).state;
-                            context.read(isNotificationOpen).state =
-                                !currentState;
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: const [
-                              Icon(FontAwesomeIcons.solidBell),
-                              Text(
-                                'Manage Notifications',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              Icon(FontAwesomeIcons.angleUp),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    /// Btn to go to the building search dialog
-                    /// where user can add buildings
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                        top: BorderSide(color: Theme.of(context).dividerColor),
-                        bottom:
-                            BorderSide(color: Theme.of(context).dividerColor),
-                      )),
-                      child: GestureDetector(
-                        onTap: () => showDialog(
-                            context: context,
-                            builder: (context) => SearchNotifierBuildings()),
+        data: (data) {
+          print('data: $data');
+          return isOpen
+              ? Container(
+                  color: Theme.of(context).cardColor.withOpacity(0.2),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).buttonColor.withOpacity(
+                                0.7), //                color: Color(0xEB3A60),
+                            border: Border(
+                              top: BorderSide(
+                                  color: Theme.of(context).dividerColor),
+                              bottom: BorderSide(
+                                  color: Theme.of(context).dividerColor),
+                            )),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: const [
-                              Text('Add Buildings'),
-                              Icon(FontAwesomeIcons.plusCircle)
-                            ],
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextButton(
+                            onPressed: () {
+                              final currentState =
+                                  context.read(isNotificationOpen).state;
+                              context.read(isNotificationOpen).state =
+                                  !currentState;
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: const [
+                                Icon(FontAwesomeIcons.solidBell),
+                                Text(
+                                  'Manage Notifications',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                Icon(FontAwesomeIcons.angleUp),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
 
-                    /// The list of buildings for which the user is subscribed
-                    Container(
-                        constraints:
-                            BoxConstraints(maxHeight: screenSize.height * 0.6),
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: data.buildingsSubscribed.length,
-                            itemBuilder: (context, itemCount) {
-                              return BuildingNotifierTile(
-                                  name: data.buildingsSubscribed[itemCount]);
-                            }))
-                  ],
-                ),
-              )
-            : GestureDetector(
-                onTap: () {
-                  final currentState = context.read(isNotificationOpen).state;
-                  context.read(isNotificationOpen).state = !currentState;
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).buttonColor.withOpacity(
-                          0.7), //                color: Color(0xEB3A60),
-                      border: Border(
-                        top: BorderSide(color: Theme.of(context).dividerColor),
-                        bottom:
-                            BorderSide(color: Theme.of(context).dividerColor),
-                      )),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const [
-                        Icon(FontAwesomeIcons.solidBell),
-                        Text(
-                          'Manage Notifications',
-                          style: TextStyle(fontSize: 18),
+                      /// Btn to go to the building search dialog
+                      /// where user can add buildings
+                      Container(
+                        decoration: BoxDecoration(
+                            border: Border(
+                          top:
+                              BorderSide(color: Theme.of(context).dividerColor),
+                          bottom:
+                              BorderSide(color: Theme.of(context).dividerColor),
+                        )),
+                        child: GestureDetector(
+                          onTap: () => showDialog(
+                              context: context,
+                              builder: (context) => SearchNotifierBuildings()),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: const [
+                                Text('Add Buildings'),
+                                Icon(FontAwesomeIcons.plusCircle)
+                              ],
+                            ),
+                          ),
                         ),
-                        Icon(FontAwesomeIcons.angleDown)
-                      ],
+                      ),
+
+                      /// The list of buildings for which the user is subscribed
+                      Container(
+                          constraints: BoxConstraints(
+                              maxHeight: screenSize.height * 0.6),
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: data.buildingsSubscribed.length,
+                              itemBuilder: (context, itemCount) {
+                                return BuildingNotifierTile(
+                                    name: data.buildingsSubscribed[itemCount]);
+                              }))
+                    ],
+                  ),
+                )
+              : GestureDetector(
+                  onTap: () {
+                    final currentState = context.read(isNotificationOpen).state;
+                    context.read(isNotificationOpen).state = !currentState;
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).buttonColor.withOpacity(
+                            0.7), //                color: Color(0xEB3A60),
+                        border: Border(
+                          top:
+                              BorderSide(color: Theme.of(context).dividerColor),
+                          bottom:
+                              BorderSide(color: Theme.of(context).dividerColor),
+                        )),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: const [
+                          Icon(FontAwesomeIcons.solidBell),
+                          Text(
+                            'Manage Notifications',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Icon(FontAwesomeIcons.angleDown)
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+        },
         loading: () => Container(
             width: 100, height: 100, child: const CircularProgressIndicator()),
         error: (error, _) =>

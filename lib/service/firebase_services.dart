@@ -154,8 +154,8 @@ final notificationsProvider = FutureProvider.autoDispose((ref) async {
           .get();
       return NotificationModel.fromDocumentSnapshot(doc);
     } catch (e) {
-      print(e);
-      return null;
+      print('error: $e');
+      return NotificationModel.fromDocumentSnapshot(null);
     }
   } else {
     return null;

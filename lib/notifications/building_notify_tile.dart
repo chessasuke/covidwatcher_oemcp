@@ -1,7 +1,6 @@
 import 'package:covid_watcher/models/user_state.dart';
 import 'package:covid_watcher/notifications/logic_notification.dart';
 import 'package:covid_watcher/providers/loading_provider.dart';
-import 'package:covid_watcher/screens/screen_settings.dart';
 import 'package:covid_watcher/service/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -53,13 +52,12 @@ class BuildingNotifierTile extends StatelessWidget {
                 await context.refresh(notificationsProvider);
 
                 /// Show snackbar
-                ScaffoldMessenger.of(settingsScaffold.currentContext)
-                    .showSnackBar(SnackBar(
-                        backgroundColor: Colors.transparent.withOpacity(0.6),
-                        content: Text(
-                          'Unsubscribed from building $name',
-                          style: const TextStyle(color: Colors.white),
-                        )));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    backgroundColor: Colors.transparent.withOpacity(0.6),
+                    content: Text(
+                      'Unsubscribed from building $name',
+                      style: const TextStyle(color: Colors.white),
+                    )));
               } else {
                 await showDialog(
                     context: context,
