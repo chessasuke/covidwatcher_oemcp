@@ -4,10 +4,10 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
-import '../models/affected_building_model.dart';
+import '../../models/affected_building_model.dart';
 import 'timeline_container.dart';
 
-/// This is the stateful widget that the main application instantiates.
+/// Markers for the affected buildings
 class CustomMarker extends StatelessWidget {
   const CustomMarker({this.affectedBuilding});
   final AffectedBuilding affectedBuilding;

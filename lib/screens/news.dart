@@ -16,7 +16,7 @@ import '../constants.dart';
 import '../controllers/news_controller.dart';
 import '../models/news_model.dart';
 
-class NewsTimeline extends ConsumerWidget {
+class News extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final NewsController dataController = watch(newsProvider);

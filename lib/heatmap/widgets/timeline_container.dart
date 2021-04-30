@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/affected_building_model.dart';
+import '../../models/affected_building_model.dart';
 import 'marker_timeline.dart';
 
 class TimelineContainer extends StatefulWidget {

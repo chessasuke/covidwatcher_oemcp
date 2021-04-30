@@ -1,7 +1,6 @@
+import 'package:covid_watcher/providers/heatmap_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final filterDateProvider = StateProvider<String>((ref) => 'Last Month');
 
 class DropdownDateFilter extends ConsumerWidget {
   @override

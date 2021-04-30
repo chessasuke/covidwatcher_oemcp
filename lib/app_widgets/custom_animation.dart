@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
 
-class AnimationExample extends StatefulWidget {
-  const AnimationExample({Key key}) : super(key: key);
+class CustomAnimation extends StatefulWidget {
+  const CustomAnimation({Key key}) : super(key: key);
 
   @override
-  _AnimationExampleState createState() => _AnimationExampleState();
+  _CustomAnimationState createState() => _CustomAnimationState();
 }
 
-class _AnimationExampleState extends State<AnimationExample> {
+class _CustomAnimationState extends State<CustomAnimation> {
   void _togglePlay() {
     setState(() => _controller.isActive = !_controller.isActive);
   }

@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 /// And it's the unit to construct the building timeline
 /// The type field determines if it's a Sanitation(false) or Covid(true) Event
 
-class BuildingEventModel {
-  BuildingEventModel({
+class EventModel {
+  EventModel({
     this.buildingName,
     this.timestamp,
     this.comments,
@@ -19,9 +19,9 @@ class BuildingEventModel {
   final String comments;
   final bool type;
 
-  factory BuildingEventModel.fromDocumentSnapshot(DocumentSnapshot doc,
+  factory EventModel.fromDocumentSnapshot(DocumentSnapshot doc,
       {bool type}) {
-    return BuildingEventModel(
+    return EventModel(
       id: doc.data()['id'] as String,
       buildingName: doc.data()['building'] as String,
       timestamp: DateTime.fromMillisecondsSinceEpoch(

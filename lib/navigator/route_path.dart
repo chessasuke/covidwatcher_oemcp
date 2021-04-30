@@ -1,6 +1,8 @@
 class TheAppPath {
+  String id;
   final bool isHeatmap;
   final bool isSettings;
+  final bool isNotification;
   final bool isNews;
   final bool isSelfReport;
   final bool isUnknown;
@@ -8,12 +10,14 @@ class TheAppPath {
   TheAppPath.heatmap()
       : isHeatmap = true,
         isSettings = false,
+        isNotification = false,
         isUnknown = false,
         isSelfReport = false,
         isNews = false;
 
   TheAppPath.settings()
       : isSettings = true,
+        isNotification = false,
         isHeatmap = false,
         isUnknown = false,
         isSelfReport = false,
@@ -21,6 +25,7 @@ class TheAppPath {
 
   TheAppPath.selfReport()
       : isSelfReport = true,
+        isNotification = false,
         isNews = false,
         isHeatmap = false,
         isSettings = false,
@@ -29,12 +34,22 @@ class TheAppPath {
   TheAppPath.news()
       : isNews = true,
         isSelfReport = false,
+        isNotification = false,
+        isHeatmap = false,
+        isSettings = false,
+        isUnknown = false;
+
+  TheAppPath.notification({this.id})
+      : isNotification = true,
+        isNews = false,
+        isSelfReport = false,
         isHeatmap = false,
         isSettings = false,
         isUnknown = false;
 
   TheAppPath.unknown()
       : isUnknown = true,
+        isNotification = false,
         isHeatmap = false,
         isSettings = false,
         isSelfReport = false,
@@ -43,6 +58,8 @@ class TheAppPath {
   bool get isHeatmapPage => isHeatmap == true;
 
   bool get isSettingsPage => isSettings == true;
+
+  bool get isNotificationPage => isNotification == true;
 
   bool get isNewsPage => isNews == true;
 

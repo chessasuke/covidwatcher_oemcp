@@ -1,11 +1,14 @@
 import 'dart:collection';
 import 'dart:convert';
 
+import 'package:covid_watcher/services_controller/news_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/news_model.dart';
-import '../service/news_service.dart';
+
+
+/// Controls the news
 
 final newsProvider = ChangeNotifierProvider<NewsController>((ref) {
   return NewsController();

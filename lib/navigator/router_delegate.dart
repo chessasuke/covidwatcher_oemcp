@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'page_manager.dart';
+import '../controllers/navigator_controller.dart';
 import 'route_path.dart';
 
 ///
@@ -22,14 +22,14 @@ class TheAppRouterDelegate extends RouterDelegate<TheAppPath>
     // changes (e.g. pushes) will be reflected in the address bar
     pageManager.addListener(notifyListeners);
   }
-  final PageManager pageManager = PageManager();
+  final NavigatorController pageManager = NavigatorController();
 
   /// In the build method we need to return Navigator using [navigatorKey]
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PageManager>.value(
+    return ChangeNotifierProvider<NavigatorController>.value(
       value: pageManager,
-      child: Consumer<PageManager>(
+      child: Consumer<NavigatorController>(
         builder: (context, pageManager, child) {
           return Navigator(
             key: navigatorKey,

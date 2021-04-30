@@ -1,16 +1,22 @@
+import 'package:covid_watcher/screens/notification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../screens/heatmap.dart';
-import '../screens/mobile_news.dart';
-import '../screens/screen_report.dart';
-import '../screens/screen_settings.dart';
-import '../screens/unknown.dart';
 import '../navigator/route_path.dart';
+import '../screens/heatmap.dart';
+import '../screens/news.dart';
+import '../screens/self_report.dart';
+import '../screens/account.dart';
+import '../screens/unknown.dart';
 
-class PageManager extends ChangeNotifier {
-  static PageManager of(BuildContext context) {
-    return Provider.of<PageManager>(context, listen: false);
+/// Controls the app navigation states and flow
+/// This is the class in charge of going from one screen to another one
+/// also controls inputs from the url bar in the web mode
+/// It's connected with the other support class of the navigation module
+
+class NavigatorController extends ChangeNotifier {
+  static NavigatorController of(BuildContext context) {
+    return Provider.of<NavigatorController>(context, listen: false);
   }
 
   /// Here we are storing the current list of pages
@@ -18,7 +24,7 @@ class PageManager extends ChangeNotifier {
   List<Page> _pages = [];
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  PageManager() {
+  NavigatorController() {
     _pages = [
       MaterialPage(
         child: HomeScreen(),
@@ -32,36 +38,31 @@ class PageManager extends ChangeNotifier {
   TheAppPath get currentPath {
     Uri uri = Uri.parse(_pages.last.name);
 
-//    print('current path: ${uri.path}');
-
     /// Handle '/'
     if (uri.pathSegments.length == 1) {
       if (uri.pathSegments[0] == 'heatmap') {
         return TheAppPath.heatmap();
       }
-    }
-
-    if (uri.pathSegments.length == 1) {
+    } else if (uri.pathSegments.length == 1) {
       if (uri.pathSegments[0] == 'news') {
         return TheAppPath.news();
       }
-    }
-
-    if (uri.pathSegments.length == 1) {
+    } else if (uri.pathSegments.length == 1) {
       if (uri.pathSegments[0] == 'report') {
         return TheAppPath.selfReport();
       }
-    }
-
-    if (uri.pathSegments.length == 1) {
+    } else if (uri.pathSegments.length == 1) {
       if (uri.pathSegments[0] == 'settings') {
         return TheAppPath.settings();
       }
-    }
-
-    // Handle unknown routes
-    else {
-//      print('handling unknown');
+    } else if (uri.pathSegments.length == 2) {
+      if (uri.pathSegments[0] != 'notification') {
+        return TheAppPath.unknown();
+      } else {
+        String remaining = uri.pathSegments[1];
+        return TheAppPath.notification(id: remaining);
+      }
+    } else {
       return TheAppPath.unknown();
     }
   }
@@ -87,7 +88,7 @@ class PageManager extends ChangeNotifier {
       // Handling details screens
       _pages.add(
         MaterialPage(
-          child: NewsTimeline(),
+          child: News(),
           key: UniqueKey(),
           name: '/news',
         ),
@@ -105,9 +106,18 @@ class PageManager extends ChangeNotifier {
       // Handling details screens
       _pages.add(
         MaterialPage(
-          child: ScreenSetting(),
+          child: ScreenAccount(),
           key: UniqueKey(),
           name: '/settings',
+        ),
+      );
+    } else if (configuration.isNotificationPage) {
+      _pages.add(
+        MaterialPage(
+          /// Send the id of the notification, then can be retrieve from a provider list using the id
+          child: NotificationScreen(notificationID: configuration.id),
+          key: UniqueKey(),
+          name: '/notification',
         ),
       );
     } else if (configuration.isHeatmapPage) {
@@ -130,6 +140,10 @@ class PageManager extends ChangeNotifier {
 
   void addReport() {
     setNewRoutePath(TheAppPath.selfReport());
+  }
+
+  void addNotificationScreen(String notificationID) {
+    setNewRoutePath(TheAppPath.notification(id: notificationID));
   }
 
   void resetToHome() {

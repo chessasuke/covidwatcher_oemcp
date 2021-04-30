@@ -23,9 +23,7 @@ class TheAppRouteInformationParser extends RouteInformationParser<TheAppPath> {
 
     if (uri.pathSegments.length == 0) {
       return TheAppPath.heatmap();
-    } else if (uri.pathSegments.length != 1) {
-      return TheAppPath.unknown();
-    } else {
+    } else if (uri.pathSegments.length == 1) {
       if (uri.pathSegments[0] == 'heatmap') {
         return TheAppPath.heatmap();
       } else if (uri.pathSegments[0] == 'news') {
@@ -37,6 +35,15 @@ class TheAppRouteInformationParser extends RouteInformationParser<TheAppPath> {
       } else {
         return TheAppPath.unknown();
       }
+    } else if (uri.pathSegments.length == 2) {
+      if (uri.pathSegments[0] != 'notification') {
+        return TheAppPath.unknown();
+      } else {
+        String remaining = uri.pathSegments[1];
+        return TheAppPath.notification(id: remaining);
+      }
+    } else {
+      return TheAppPath.unknown();
     }
   }
 
@@ -44,20 +51,16 @@ class TheAppRouteInformationParser extends RouteInformationParser<TheAppPath> {
   RouteInformation restoreRouteInformation(TheAppPath path) {
     if (path.isHeatmapPage) {
       return const RouteInformation(location: '/heatmap');
-    }
-
-    if (path.isNewsPage) {
+    } else if (path.isNewsPage) {
       return const RouteInformation(location: '/news');
-    }
-
-    if (path.isReportPage) {
+    } else if (path.isReportPage) {
       return const RouteInformation(location: '/report');
-    }
-
-    if (path.isSettingsPage) {
+    } else if (path.isSettingsPage) {
       return const RouteInformation(location: '/settings');
+    } else if (path.isNotificationPage) {
+      return RouteInformation(location: '/notification/${path.id}');
+    } else {
+      return const RouteInformation(location: '/unknown');
     }
-
-    return const RouteInformation(location: '/unknown');
   }
 }

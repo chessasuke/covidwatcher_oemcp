@@ -8,8 +8,8 @@ import 'subscribed_building_wigets/manage_favorites_btn.dart';
 
 /// NOTIFICATION WIDGET, this goes directly in screen settings
 
-class SettingsWidget extends StatelessWidget {
-  const SettingsWidget({@required this.currentUser});
+class AccountWidget extends StatelessWidget {
+  const AccountWidget({@required this.currentUser});
   final UserModel currentUser;
 
   @override
@@ -17,7 +17,7 @@ class SettingsWidget extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         height: screenSize.height * 0.9,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -26,13 +26,11 @@ class SettingsWidget extends StatelessWidget {
               'Hello ${currentUser.getName}!',
               style: const TextStyle(fontSize: 24),
             ),
-            SizedBox(
-              child: Column(
-                children: [
-                  SubscribedBuildingBtn(),
-                  FcmNotificationsBtn(),
-                ],
-              ),
+            Column(
+              children: [
+                SubscribedBuildingBtn(),
+                FcmNotificationsBtn(),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

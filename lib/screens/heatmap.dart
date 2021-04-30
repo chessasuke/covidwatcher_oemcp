@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../app_themes/responsive.dart';
+import '../app_widgets/mobile_page_manager.dart';
+import '../fcm/fcm_config.dart';
 import '../heatmap/heatMap.dart';
-import '../theme/responsive.dart';
-import 'mobile_page_manager.dart';
+
+/// The first app screen displayed
+/// it sets the mode (web vs mobile) according to the device width
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,6 +16,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    /// Initializes [FCMservice] to listen for [PushNotification]s
+    FcmService.initializeFCM(context);
     super.initState();
   }
 

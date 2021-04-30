@@ -31,30 +31,30 @@ class AffectedBuilding {
   bool _status;
   bool get status => _status;
 
-  final List<BuildingEventModel> _buildingTimeline = [];
-  UnmodifiableListView<BuildingEventModel> get buildingTimeline =>
+  final List<EventModel> _buildingTimeline = [];
+  UnmodifiableListView<EventModel> get buildingTimeline =>
       UnmodifiableListView(_buildingTimeline);
 
-  void addBuildingTimeLineEvent(BuildingEventModel value) {
+  void addBuildingTimeLineEvent(EventModel value) {
     _buildingTimeline.add(value);
     // ignore: cascade_invocations
-    _buildingTimeline.sort((BuildingEventModel a, BuildingEventModel b) =>
-        (a.timestamp).compareTo(b.timestamp));
+    _buildingTimeline.sort(
+        (EventModel a, EventModel b) => (a.timestamp).compareTo(b.timestamp));
     udpateStatus();
   }
 
-  bool removeBuildingTimeLineEvent(BuildingEventModel value) {
+  bool removeBuildingTimeLineEvent(EventModel value) {
     var isRemoved = _buildingTimeline.remove(value);
     print('isRemoved: $isRemoved');
     udpateStatus();
     return isRemoved;
   }
 
-  void addBuildingTimeLine(List<BuildingEventModel> value) {
+  void addBuildingTimeLine(List<EventModel> value) {
     _buildingTimeline.addAll(value);
     // ignore: cascade_invocations
-    _buildingTimeline.sort((BuildingEventModel a, BuildingEventModel b) =>
-        (a.timestamp).compareTo(b.timestamp));
+    _buildingTimeline.sort(
+        (EventModel a, EventModel b) => (a.timestamp).compareTo(b.timestamp));
     udpateStatus();
   }
 

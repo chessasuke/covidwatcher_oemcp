@@ -1,9 +1,9 @@
 import 'package:covid_watcher/heatmap/heatMap.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'mobile_news.dart';
-import 'screen_report.dart';
-import 'screen_settings.dart';
+import '../screens/news.dart';
+import '../screens/self_report.dart';
+import '../screens/account.dart';
 
 class MobilePageManager extends StatefulWidget {
   @override
@@ -15,9 +15,9 @@ class _MobilePageManagerState extends State<MobilePageManager> {
   int _selectedPageIndex;
   final List<Widget> _pages = [
     Heatmap(),
-    NewsTimeline(),
+    News(),
     ScreenReport(),
-    ScreenSetting(),
+    ScreenAccount(),
   ];
 
   @override
@@ -71,8 +71,8 @@ class _MobilePageManagerState extends State<MobilePageManager> {
                 label: 'Report',
               ),
               BottomNavigationBarItem(
-                icon: Icon(FontAwesomeIcons.cog),
-                label: 'Settings',
+                icon: Icon(FontAwesomeIcons.user),
+                label: 'Account',
               ),
             ],
             unselectedItemColor: Theme.of(context).disabledColor,

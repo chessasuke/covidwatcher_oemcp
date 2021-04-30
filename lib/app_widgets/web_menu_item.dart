@@ -1,5 +1,7 @@
+import 'package:covid_watcher/controllers/navigator_controller.dart';
 import 'package:flutter/material.dart';
-import '../navigator/page_manager.dart';
+
+/// Item for the web menu at the top-left of the screen in web mode
 
 class WebMenuItem extends StatefulWidget {
   const WebMenuItem({this.menuName, Key key}) : super(key: key);
@@ -25,13 +27,13 @@ class _WebMenuItemState extends State<WebMenuItem> {
     return GestureDetector(
       onTap: () {
         if (widget.menuName == 'Heatmap') {
-          PageManager.of(context).resetToHome();
+          NavigatorController.of(context).resetToHome();
         } else if (widget.menuName == 'News') {
-          PageManager.of(context).addNews();
+          NavigatorController.of(context).addNews();
         } else if (widget.menuName == 'Self-Report') {
-          PageManager.of(context).addReport();
+          NavigatorController.of(context).addReport();
         } else if (widget.menuName == 'Settings') {
-          PageManager.of(context).addSettings();
+          NavigatorController.of(context).addSettings();
         }
       },
       child: MouseRegion(

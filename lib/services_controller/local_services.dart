@@ -1,10 +1,25 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<String> setNotifierBuildings(List<String> subscribedBuildings) async {
+/// Services connected with the actual device,
+/// like fetching internal stored data with [SharedPreferences]
+
+Future<String> addNotifierBuildings(List<String> subscribedBuildings) async {
   print('set new buildings: ${subscribedBuildings.length}');
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  final bool success = await prefs.setStringList('sub', subscribedBuildings);
+  /// Get the list of saved buildings
+  List<String> savedBuildings = prefs.getStringList('sub');
+  savedBuildings ??= [];
+
+  /// Add the new buildings if they are not in the saved building list
+  subscribedBuildings.forEach((element) {
+    if (!savedBuildings.contains(element)) {
+      savedBuildings.add(element);
+    }
+  });
+
+  /// Save the new building list to [SharedPreferences]
+  final bool success = await prefs.setStringList('sub', savedBuildings);
   if (success) {
     return 'ok';
   } else {

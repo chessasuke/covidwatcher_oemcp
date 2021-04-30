@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final appThemeProvider = ChangeNotifierProvider<AppDynamicTheme>((ref) {
-  return AppDynamicTheme();
-});
-
 class AppDynamicTheme extends ChangeNotifier {
   AppDynamicTheme();
 

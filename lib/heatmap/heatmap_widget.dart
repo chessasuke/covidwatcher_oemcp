@@ -13,11 +13,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:covid_watcher/controllers/affected_buildings.dart';
 import '../providers/structures_provider.dart';
 
+/// The actual heatmap widget
+
 class HeatmapWidget extends ConsumerWidget {
   HeatmapWidget({this.favs});
   final List<String> favs;
-
-  static const double scaleLimit = 1.6487212707001282;
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
@@ -27,7 +27,7 @@ class HeatmapWidget extends ConsumerWidget {
     final showBookmarked = watch(showBookmarkedProvider).state;
 
     final buildings = watch(buildingProvider);
-    final affectedBuildings = watch(affectedBuildingsProvider);
+    final affectedBuildings = watch(affectedBuildingsProvider).state;
 
     final structures4d = watch(structure4dProvider);
     final streets = watch(streetsProvider);
@@ -40,8 +40,8 @@ class HeatmapWidget extends ConsumerWidget {
         minScale: 1,
         child: Stack(
 
-          /// Call heatmap controller to render the map
-            children: HeatmapController.buildList(
+            /// Call heatmap controller to render the map
+            children: HeatmapController.buildMap(
           screenSize,
           showBuildingMarker,
           showStructureMarker,
@@ -50,7 +50,7 @@ class HeatmapWidget extends ConsumerWidget {
           buildings,
           structures4d,
           streets,
-          affectedBuildings.state,
+          affectedBuildings,
           favs,
         )),
       ),

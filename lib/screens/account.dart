@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../notifications/settings_widget.dart';
+import '../notifications/account_widget.dart';
 import '../providers/general_providers.dart';
 
 // ignore: use_key_in_widget_constructors
-class ScreenSetting extends ConsumerWidget {
+class ScreenAccount extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final screenSize = MediaQuery.of(context).size;
@@ -42,7 +42,7 @@ class ScreenSetting extends ConsumerWidget {
                     )),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: SettingsWidget(currentUser: currentUser.user),
+                  child: AccountWidget(currentUser: currentUser.user),
                 ),
               ),
             ),

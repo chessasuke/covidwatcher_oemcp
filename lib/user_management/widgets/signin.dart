@@ -1,14 +1,14 @@
-import 'package:covid_watcher/auth/logic/auth_logic.dart';
-import 'package:covid_watcher/auth/utils/strings.dart';
-import 'package:covid_watcher/auth/widgets/reset_password.dart';
-import 'package:covid_watcher/auth/widgets/signup.dart';
-import 'package:covid_watcher/theme/adabtableFontSize.dart';
+import 'package:covid_watcher/app_themes/adabtableFontSize.dart';
+import 'package:covid_watcher/fcm/fcm_config.dart';
+import 'package:covid_watcher/user_management/logic/auth_logic.dart';
+import 'package:covid_watcher/user_management/utils/strings.dart';
+import 'package:covid_watcher/user_management/widgets/reset_password.dart';
+import 'package:covid_watcher/user_management/widgets/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../service/firebase_auth_services.dart';
-
+import 'package:covid_watcher/services_controller/firebase_auth_services.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key key}) : super(key: key);

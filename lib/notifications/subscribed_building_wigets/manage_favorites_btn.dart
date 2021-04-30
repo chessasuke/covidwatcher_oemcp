@@ -4,24 +4,24 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../providers/general_providers.dart';
-import '../providers/heatmap_providers.dart';
-import '../providers/notifications_providers.dart';
-import '../services_controller/local_services.dart';
-import '../user_management/logic/user_state.dart';
+import '../../providers/general_providers.dart';
+import '../../providers/heatmap_providers.dart';
+import '../../providers/notifications_providers.dart';
+import '../../services_controller/local_services.dart';
+import '../../user_management/logic/user_state.dart';
+import 'subscribed_building_tile.dart';
+import 'favorite_search_tile.dart';
 import 'search_favorite_building.dart';
-import 'wigets/building_notification_tile.dart';
-import 'wigets/favorite_search_tile.dart';
 
-/// Notiifcation button widget
+/// Notification button widget
 /// A widget that when expanded, shows the buildings for which the user is subscribed (favorites)
 /// Shows a list view of all notifier buildings, and user can delete any of the buildings quickly
 
-class ManageFavoritesBtn extends ConsumerWidget {
+class SubscribedBuildingBtn extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final screenSize = MediaQuery.of(context).size;
-    final isOpen = watch(isNotificationOpen).state;
+    final isOpen = watch(isFavoritesOpen).state;
     final notifierBuildings = watch(bookmarkedBuidlingsProvider);
 
     return notifierBuildings.when(
@@ -47,19 +47,21 @@ class ManageFavoritesBtn extends ConsumerWidget {
                           child: TextButton(
                             onPressed: () {
                               final currentState =
-                                  context.read(isNotificationOpen).state;
-                              context.read(isNotificationOpen).state =
+                                  context.read(isFavoritesOpen).state;
+                              context.read(isFavoritesOpen).state =
                                   !currentState;
                             },
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: const [
-                                Icon(FontAwesomeIcons.solidBell),
+                                Flexible(
+                                    child: Icon(FontAwesomeIcons.solidBell)),
                                 Text(
-                                  'Manage Notifications',
+                                  'Subscriptions',
                                   style: TextStyle(fontSize: 18),
+                                  overflow: TextOverflow.clip,
                                 ),
-                                Icon(FontAwesomeIcons.angleUp),
+                                Flexible(child: Icon(FontAwesomeIcons.angleUp)),
                               ],
                             ),
                           ),
@@ -79,7 +81,8 @@ class ManageFavoritesBtn extends ConsumerWidget {
                         child: GestureDetector(
                           onTap: () => showDialog(
                               context: context,
-                              builder: (context) => SearchFavoriteBuildings()),
+                              builder: (context) =>
+                                  SearchSubscribedBuildings()),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 4.0),
                             child: Row(
@@ -96,17 +99,16 @@ class ManageFavoritesBtn extends ConsumerWidget {
                       /// The list of buildings for which the user is subscribed
                       Container(
                           constraints: BoxConstraints(
-                              maxHeight: screenSize.height * 0.6),
+                              maxHeight: screenSize.height * 0.2),
                           child: ListView.builder(
                               shrinkWrap: true,
                               itemCount: buildingsSubscribed.length,
                               itemBuilder: (context, itemCount) {
-                                print(buildingsSubscribed.length);
                                 print(
-                                    'displaying buildings retrieved from shared preferences');
+                                    'displaying ${buildingsSubscribed.length} buildings retrieved from shared preferences');
 
                                 /// OEMCP version
-                                return FavoriteBuildingTile(
+                                return SubscribedBuildingTile(
                                   name: buildingsSubscribed[itemCount],
                                   callback: () async {
                                     UserState userState =
@@ -171,8 +173,8 @@ class ManageFavoritesBtn extends ConsumerWidget {
                 )
               : GestureDetector(
                   onTap: () {
-                    final currentState = context.read(isNotificationOpen).state;
-                    context.read(isNotificationOpen).state = !currentState;
+                    final currentState = context.read(isFavoritesOpen).state;
+                    context.read(isFavoritesOpen).state = !currentState;
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -187,14 +189,15 @@ class ManageFavoritesBtn extends ConsumerWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Icon(FontAwesomeIcons.solidBell),
+                          Flexible(child: Icon(FontAwesomeIcons.solidBuilding)),
                           Text(
-                            'Manage Notifications',
+                            'Subscriptions',
                             style: TextStyle(fontSize: 18),
+                            overflow: TextOverflow.clip,
                           ),
-                          Icon(FontAwesomeIcons.angleDown)
+                          Flexible(child: Icon(FontAwesomeIcons.angleDown))
                         ],
                       ),
                     ),

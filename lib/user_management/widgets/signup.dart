@@ -1,10 +1,11 @@
 import 'dart:typed_data';
-import 'package:covid_watcher/auth/utils/custom_auth_widgets.dart';
-import 'package:covid_watcher/auth/utils/textfield_section.dart';
-import 'package:covid_watcher/auth/views/signup_followup.dart';
+import 'package:covid_watcher/user_management/utils/custom_auth_widgets.dart';
+import 'package:covid_watcher/user_management/utils/textfield_section.dart';
+import 'package:covid_watcher/user_management/widgets/signup_followup.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:covid_watcher/services_controller/firebase_auth_services.dart';
 
 import '../logic/auth_logic.dart';
 

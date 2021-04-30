@@ -1,4 +1,7 @@
-import 'mercator_projection/mercator.dart';
+const String visitorReportEmail = 'c19resource@utdallas.edu';
+const String reportEmailSubject = 'UT Dallas Visitor Self-Report Form';
+const String reportEmailBody =
+    'Please enter relevant information like contact information, locations visited, and date of visit.';
 
 const String newsApiKey = '0de4a7jbspnf4n4z41hbdwyty';
 const String news_url = 'https://datanews.io/';
@@ -37,11 +40,11 @@ const utdCenterLong = -96.7501;
 const utdCenterLat = 32.9800;
 
 /// UTD center X/Y
-final double utdCenterX = Mercator.xAxisProjection(-96.7501);
-final double utdCenterY = Mercator.yAxisProjection(32.9800);
-
-final double utdCenterX2 = Mercator.xAxisProjection(-96.740728);
-final double utdCenterY2 = Mercator.yAxisProjection(32.968878);
+//final double utdCenterX = Mercator.xAxisProjection(-96.7501);
+//final double utdCenterY = Mercator.yAxisProjection(32.9800);
+//
+//final double utdCenterX2 = Mercator.xAxisProjection(-96.740728);
+//final double utdCenterY2 = Mercator.yAxisProjection(32.968878);
 
 final double convertedCenterX = -10770171.866198298;
 final double convertedCenterY = 3892649.5986903203;

@@ -1,5 +1,5 @@
-importScripts("https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/7.20.0/firebase-messaging.js");
+importScripts("https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/8.4.2/firebase-messaging.js");
 
 firebase.initializeApp({
     apiKey: "AIzaSyCzUYLIL8cjN9yA6xjm89bIYeW9tj4L-aA",
@@ -13,7 +13,7 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-// Optional:
-messaging.onBackgroundMessage((message) => {
-    console.log("onBackgroundMessage", message);
-});
+// // Optional:
+// messaging.onBackgroundMessage((message) => {
+//     console.log("onBackgroundMessage", message);
+// });

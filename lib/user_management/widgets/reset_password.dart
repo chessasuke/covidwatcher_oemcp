@@ -1,4 +1,4 @@
-import 'package:covid_watcher/auth/utils/custom_auth_widgets.dart';
+import 'package:covid_watcher/user_management/utils/custom_auth_widgets.dart';
 import 'package:flutter/material.dart';
 
 class ResetPassword extends StatelessWidget {

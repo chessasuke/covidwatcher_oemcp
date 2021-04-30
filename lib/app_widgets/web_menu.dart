@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'web_menu_item.dart';
 
+/// The web menu at the top-left of the screen in web mode
+
 class WebMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

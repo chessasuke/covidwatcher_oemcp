@@ -1,8 +1,8 @@
+import 'package:covid_watcher/providers/heatmap_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final filterRateProvider = StateProvider<String>((ref) => '+0');
 
 class DropdownRateFilter extends ConsumerWidget {
   @override

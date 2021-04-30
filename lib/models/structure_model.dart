@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Structure {
-  Structure({
+class StructureModel {
+  StructureModel({
     this.coordinate,
     this.name,
     this.centroid,
@@ -21,9 +21,9 @@ class Structure {
   final List<double> centroid;
 }
 
-class Street {
+class StreetModel {
   final String name;
   final List coordinates;
 
-  Street({this.name, this.coordinates});
+  StreetModel({this.name, this.coordinates});
 }

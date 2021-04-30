@@ -6,12 +6,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-import '../models/building_event_model.dart';
+import '../../models/building_event_model.dart';
 
 class MarkerTimeline extends StatelessWidget {
   const MarkerTimeline({this.buildingTimeline});
 
-  final List<BuildingEventModel> buildingTimeline;
+  final List<EventModel> buildingTimeline;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class MarkerTimeline extends StatelessWidget {
 class _Timeline extends StatelessWidget {
   const _Timeline({Key key, this.buildingTimeline}) : super(key: key);
 
-  final List<BuildingEventModel> buildingTimeline;
+  final List<EventModel> buildingTimeline;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _Timeline extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           final int itemIndex = index ~/ 2;
-          final BuildingEventModel event = buildingTimeline[itemIndex];
+          final EventModel event = buildingTimeline[itemIndex];
 
           final bool isLeftAlign = itemIndex.isEven;
 

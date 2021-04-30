@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../data/buildingCoord.dart';
-import '../data/coord3.dart';
-import '../data/coord4.dart';
+import '../../local_data/buildingCoord.dart';
+import '../../local_data/coord3.dart';
+import '../../local_data/coord4.dart';
 
 class UpdatedCustomMap extends CustomPainter {
   @override

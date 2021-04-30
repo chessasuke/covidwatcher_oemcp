@@ -1,8 +1,7 @@
 import 'dart:collection';
 
-import 'package:covid_watcher/heatmap/heatmap_widget.dart';
-import 'package:covid_watcher/heatmap/widgets/dropdown_rate_filter.dart';
 import 'package:covid_watcher/local_data/buildingName.dart';
+import 'package:covid_watcher/providers/heatmap_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,7 +11,6 @@ import 'event_controller.dart';
 
 final affectedBuildingsProvider =
     StateNotifierProvider.autoDispose<BuildingNotifier>((ref) {
-
   ///*********** NEW VERSION OF OEMCP DOESNT INCLUDE SANITATION*************
   /// SO it receives only infection events
 

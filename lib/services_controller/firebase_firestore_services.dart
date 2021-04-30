@@ -5,7 +5,6 @@ import 'package:covid_watcher/models/report_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 /// Stream connected to firebase - listens for new covid cases
 final covidCasesProvider =
     StreamProvider.autoDispose<List<DocumentChange>>((ref) async* {
@@ -34,26 +33,24 @@ final covidCasesProvider =
 });
 
 /// Stream connected to firebase - listens for new sanitation events
-final sanitationCasesProvider =
-    StreamProvider.autoDispose<List<DocumentChange>>((ref) async* {
-  final stream = FirebaseFirestore.instance
-      .collection('sanitized-cases')
-      .orderBy('timestamp', descending: true)
-      .snapshots()
-      .distinct();
-
-  /// Yield new DocChanges
-  await for (final value in stream) {
-    List<DocumentChange> newEvents = [];
-    if (value.runtimeType == QuerySnapshot) {
-      QuerySnapshot temp = value;
-      newEvents = temp.docChanges.toList();
-    }
-    yield newEvents;
-  }
-});
-
-
+//final sanitationCasesProvider =
+//    StreamProvider.autoDispose<List<DocumentChange>>((ref) async* {
+//  final stream = FirebaseFirestore.instance
+//      .collection('sanitized-cases')
+//      .orderBy('timestamp', descending: true)
+//      .snapshots()
+//      .distinct();
+//
+//  /// Yield new DocChanges
+//  await for (final value in stream) {
+//    List<DocumentChange> newEvents = [];
+//    if (value.runtimeType == QuerySnapshot) {
+//      QuerySnapshot temp = value;
+//      newEvents = temp.docChanges.toList();
+//    }
+//    yield newEvents;
+//  }
+//});
 
 /// Send report to Firebase
 
@@ -105,7 +102,7 @@ Future<String> sendVisitorReport(ReportModel report) async {
       FirebaseFirestore.instance.collection('visitor-covid-cases');
   String newID = covidCol.doc().id;
   final DocumentReference newCovidCaseRef = covidCol.doc(newID);
-  print('id: $newID');
+//  print('id: $newID');
 
   final Map<String, dynamic> data = {
     'id': newID,
