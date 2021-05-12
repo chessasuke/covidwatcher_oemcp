@@ -1,15 +1,15 @@
+import 'package:covid_watcher/controllers/notification_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../controllers/user_state.dart';
 import '../../local_data/buildingName.dart';
 import '../../providers/general_providers.dart';
 import '../../providers/heatmap_providers.dart';
 import '../../providers/notifications_providers.dart';
-import '../../services_controller/local_services.dart';
-import '../../user_management/logic/user_state.dart';
 import 'favorite_search_tile.dart';
 
 /// Dialog that popups to search buildings and add them to notification settings
@@ -50,9 +50,9 @@ class SearchSubscribedBuildings extends StatelessWidget {
                                       .state
                                       .isNotEmpty) {
                                     print('save new buildings');
-                                    String statusCode = 'ok';
+//                                    String statusCode = 'ok';
                                     final currentUser =
-                                        context.read(userProvider.state);
+                                        context.read(userController.state);
                                     if (currentUser is UserLoaded) {
                                       /// Start the saving process
                                       context.read(loadingProvider).state =
@@ -60,38 +60,55 @@ class SearchSubscribedBuildings extends StatelessWidget {
 
                                       /// OEMCP version
                                       /// save to shared preference and to a state provider
-                                      statusCode = await addNotifierBuildings(
-                                          context
-                                              .read(notifierBuildingsSelected)
-                                              .state);
+                                      List<String> buildingFailedToSubscribe =
+                                          [];
+                                      buildingFailedToSubscribe =
+                                          await NotificationController
+                                              .subscribeToBuildings(context
+                                                  .read(
+                                                      notifierBuildingsSelected)
+                                                  .state);
+                                      if (buildingFailedToSubscribe
+                                          .isNotEmpty) {
+                                        buildingFailedToSubscribe
+                                            .forEach((element) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  duration: const Duration(
+                                                      seconds: 5),
+                                                  backgroundColor: Colors
+                                                      .transparent
+                                                      .withOpacity(0.7),
+                                                  elevation: 50,
+                                                  content: Text(
+                                                    'Failed to subscribe to $element',
+                                                    style: const TextStyle(
+                                                        color: Colors.white),
+                                                  )));
+                                        });
+                                      } else {
+                                        context
+                                            .read(notifierBuildingsSelected)
+                                            .state
+                                            .forEach((element) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  backgroundColor: Colors
+                                                      .transparent
+                                                      .withOpacity(0.7),
+                                                  elevation: 50,
+                                                  content: Text(
+                                                    'Subscribed to $element',
+                                                    style: const TextStyle(
+                                                        color: Colors.white),
+                                                  )));
+                                        });
+                                      }
                                       await context
                                           .refresh(bookmarkedBuidlingsProvider);
 
                                       context.read(loadingProvider).state =
                                           false;
-                                    }
-                                    if (statusCode != 'ok') {
-                                      await showDialog(
-                                          context: context,
-                                          builder: (context) =>
-                                              const AlertDialog(
-                                                title: Text('Error'),
-                                                actions: [
-                                                  Text('Operation Failed')
-                                                ],
-                                              ));
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                              backgroundColor: Colors
-                                                  .transparent
-                                                  .withOpacity(0.7),
-                                              elevation: 50,
-                                              content: const Text(
-                                                'Notifications Updated',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              )));
                                     }
                                   } else {
                                     print('no buildings selected');

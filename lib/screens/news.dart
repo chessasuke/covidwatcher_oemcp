@@ -1,8 +1,5 @@
 import 'dart:math';
 
-import 'package:covid_watcher/app_themes/responsive.dart';
-import 'package:covid_watcher/app_widgets/web_menu.dart';
-import 'package:covid_watcher/user_management/logic/auth_logic.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,9 +9,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
+import '../app_themes/responsive.dart';
+import '../app_widgets/web_menu.dart';
 import '../constants.dart';
 import '../controllers/news_controller.dart';
 import '../models/news_model.dart';
+import '../utils.dart';
 
 class News extends ConsumerWidget {
   @override
@@ -248,7 +248,7 @@ class _TimelineChild extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    AuthenticationService.launchURL(itemData.url);
+                    Utils.launchURL(itemData.url);
                   },
                   child: Text(itemData.title,
                       overflow: TextOverflow.ellipsis,
@@ -302,7 +302,7 @@ class _Header extends StatelessWidget {
         Flexible(
           child: InkWell(
               onTap: () async {
-                await AuthenticationService.launchURL(cdcURL);
+                await Utils.launchURL(cdcURL);
               },
               child: Container(
                 constraints: const BoxConstraints(maxHeight: 35, maxWidth: 35),
@@ -312,7 +312,7 @@ class _Header extends StatelessWidget {
         Flexible(
           child: InkWell(
               onTap: () async {
-                await AuthenticationService.launchURL(whoURL);
+                await Utils.launchURL(whoURL);
               },
               child: Container(
                 constraints: const BoxConstraints(maxHeight: 35, maxWidth: 35),
@@ -322,10 +322,10 @@ class _Header extends StatelessWidget {
         Flexible(
           child: InkWell(
               onTap: () async {
-                await AuthenticationService.launchURL(utdURL);
+                await Utils.launchURL(utdURL);
               },
               child: Container(
-                constraints: BoxConstraints(maxHeight: 35, maxWidth: 35),
+                constraints: const BoxConstraints(maxHeight: 35, maxWidth: 35),
                 child: Image.asset('images/utd.png'),
               )),
         ),

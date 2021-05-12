@@ -30,21 +30,26 @@ class FcmNotificationTile extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(3),
+
+          /// TODO overflow
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                onTap: () => viewCallback(notification.id),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(notification.title ?? ''),
-                    Text(notification.time == null
-                        ? ''
-                        : DateFormat("MM-dd  HH:mm:ss")
-                            .format(DateTime.parse(notification.time))
-                            .toString()),
-                  ],
+              Flexible(
+                child: InkWell(
+                  onTap: () => viewCallback(notification.id),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(notification.title ?? '',
+                          overflow: TextOverflow.ellipsis),
+                      Text(notification.time == null
+                          ? ''
+                          : DateFormat("MM-dd  HH:mm:ss")
+                              .format(DateTime.parse(notification.time))
+                              .toString()),
+                    ],
+                  ),
                 ),
               ),
               IconButton(

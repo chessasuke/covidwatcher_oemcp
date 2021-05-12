@@ -106,7 +106,7 @@ class NavigatorController extends ChangeNotifier {
       // Handling details screens
       _pages.add(
         MaterialPage(
-          child: ScreenAccount(),
+          child: ScreenUserAccount(),
           key: UniqueKey(),
           name: '/settings',
         ),

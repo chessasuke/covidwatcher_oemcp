@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widgets/dropdown_date_filter.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:covid_watcher/controllers/affected_buildings.dart';
+import 'package:covid_watcher/controllers/affected_buildings_controller.dart';
 import '../providers/structures_provider.dart';
 
 /// The actual heatmap widget
@@ -108,7 +108,6 @@ class HeatmapWidget extends ConsumerWidget {
                                       Theme.of(context).dialogBackgroundColor,
                                   elevation: 30,
                                   title: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: const [
                                       Flexible(
                                           child: Icon(FontAwesomeIcons.filter)),

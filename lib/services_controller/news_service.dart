@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import '../constants.dart';
 
 class NewsService {
-  static Future<String> sendRequest(
+  static Future<String> requestNews(
       {String authority = 'api.datanews.io',
       String path = '/v1/news',
       int pageIndex = 0,

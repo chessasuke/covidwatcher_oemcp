@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/user_model.dart';
-import '../../services_controller/firebase_auth_services.dart';
-import '../../services_controller/firebase_firestore_services.dart';
+import '../models/user_model.dart';
+import '../services_controller/firebase_auth_services.dart';
+import '../services_controller/firebase_firestore_services.dart';
 
-final userProvider = StateNotifierProvider.autoDispose<UserNotifier>((ref) {
+final userController = StateNotifierProvider.autoDispose<UserNotifier>((ref) {
   final userStreamData = ref.watch(authStateProvider);
 
   /// Check if firebase

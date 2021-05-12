@@ -1,6 +1,6 @@
 import 'package:covid_watcher/app_themes/responsive.dart';
 import 'package:covid_watcher/app_widgets/web_menu.dart';
-import 'package:covid_watcher/user_management/logic/user_state.dart';
+import 'package:covid_watcher/controllers/user_state.dart';
 import 'package:covid_watcher/user_management/widgets/signin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +11,11 @@ import '../notifications/account_widget.dart';
 import '../providers/general_providers.dart';
 
 // ignore: use_key_in_widget_constructors
-class ScreenAccount extends ConsumerWidget {
+class ScreenUserAccount extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final screenSize = MediaQuery.of(context).size;
-    final UserState currentUser = watch(userProvider.state);
+    final UserState currentUser = watch(userController.state);
     final isLoading = watch(loadingProvider).state;
 
     return SafeArea(

@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/building_event_model.dart';
+import '../models/event_model.dart';
 import '../providers/heatmap_providers.dart';
 import '../services_controller/firebase_firestore_services.dart';
 
 final eventsControllerProvider =
     StateProvider.autoDispose<List<EventModel>>((ref) {
-  print('inside event controller');
+//  print('inside event controller');
 
   /// A list of new covid events
   final newCovidEvents = ref.watch(covidCasesProvider);
@@ -24,6 +24,8 @@ final eventsControllerProvider =
   /// TODO (For now not implementing modified elements)
   if (newCovidEvents.data != null) {
     if (newCovidEvents.data.value != null) {
+//      print(
+//          'newCovidEvents.data.value.length: ${newCovidEvents.data.value.length}');
       for (final event in newCovidEvents.data.value) {
         if (event.type == DocumentChangeType.added) {
           /// If id is already in repository is a duplicate -> skip!
@@ -32,8 +34,13 @@ final eventsControllerProvider =
                   (element) => event.doc.data()['id'] == element.id)) {
             continue;
           }
-          eventsRepository
-              .add(EventModel.fromDocumentSnapshot(event.doc, type: true));
+//          print('adding: ${event.doc.data()['id']}');
+          try {
+            eventsRepository
+                .add(EventModel.fromDocumentSnapshot(event.doc, type: true));
+          } catch (e) {
+            print('error: $e');
+          }
         } else if (event.type == DocumentChangeType.removed) {
           eventsRepository
               .removeWhere((item) => item.id == event.doc.data()['id']);
@@ -64,6 +71,7 @@ final eventsControllerProvider =
 
   /// Filter by Date
   final filter = ref.watch(filterDateProvider).state;
+//  print('filter: $filter');
   if (filter != null && filter != '') {
     DateTime filterDateTime;
 
@@ -87,8 +95,10 @@ final eventsControllerProvider =
         filterList.add(eventsRepository[i]);
       }
     }
+//    print('filterList.length: ${filterList.length}');
     return filterList;
   } else {
+//    print('eventsRepository.length: ${eventsRepository.length}');
     return eventsRepository;
   }
 });

@@ -1,6 +1,5 @@
 import 'package:covid_watcher/app_themes/adabtableFontSize.dart';
-import 'package:covid_watcher/fcm/fcm_config.dart';
-import 'package:covid_watcher/user_management/logic/auth_logic.dart';
+import 'package:covid_watcher/user_management/logic/user_controller.dart';
 import 'package:covid_watcher/user_management/utils/strings.dart';
 import 'package:covid_watcher/user_management/widgets/reset_password.dart';
 import 'package:covid_watcher/user_management/widgets/signup.dart';
@@ -94,7 +93,7 @@ class _SignInState extends State<SignIn> {
                           hintText: "Email",
                           fillColor: Colors.white,
                           errorText: _isEditingEmail
-                              ? AuthenticationService.isEmailError(
+                              ? UserController.isEmailError(
                                       textControllerEmail.text)
                                   ? 'Bad format'
                                   : null
@@ -149,7 +148,7 @@ class _SignInState extends State<SignIn> {
                   hintText: "Password",
                   fillColor: Colors.white,
                   errorText: _isEditingPassword
-                      ? AuthenticationService.validatePassword(
+                      ? UserController.validatePassword(
                           textControllerPassword.text)
                       : null,
                   errorStyle: const TextStyle(
@@ -190,10 +189,10 @@ class _SignInState extends State<SignIn> {
 
                                 String statusCode;
 
-                                if (AuthenticationService.validateEmail(
+                                if (UserController.validateEmail(
                                             textControllerEmail.text) ==
                                         null &&
-                                    AuthenticationService.validatePassword(
+                                    UserController.validatePassword(
                                             textControllerPassword.text) ==
                                         null) {
                                   /// SIGN IN PROCESS START
@@ -261,7 +260,7 @@ class _SignInState extends State<SignIn> {
                               flex: 2,
                               child: InkWell(
                                 onTap: () async {
-                                  if (AuthenticationService.validateEmail(
+                                  if (UserController.validateEmail(
                                           textControllerEmail.text) ==
                                       null) {
                                     String statusCode = await context

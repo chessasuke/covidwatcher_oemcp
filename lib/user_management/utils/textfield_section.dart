@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../logic/auth_logic.dart';
+import '../logic/user_controller.dart';
 
 /// TextField Section to input user info
 class TextFieldSection extends StatefulWidget {
@@ -48,11 +48,11 @@ class _TextFieldSectionState extends State<TextFieldSection> {
 
   String validateInput(String input) {
     if (widget.inputType == 'email')
-      return AuthenticationService.validateEmail(input);
+      return UserController.validateEmail(input);
     else if (widget.inputType == 'name')
       return null;
     else if (widget.inputType == 'password')
-      return AuthenticationService.validatePassword(input);
+      return UserController.validatePassword(input);
     else if (widget.inputType == 'password2')
       return null;
     else

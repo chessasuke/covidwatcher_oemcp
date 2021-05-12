@@ -7,10 +7,8 @@ import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/date_symbol_data_custom.dart';
-
 import 'app_themes/theme.dart';
-import 'fcm/fcm_config.dart';
+import 'services_controller/fcm_services.dart';
 import 'navigator/route_parser.dart';
 import 'navigator/router_delegate.dart';
 

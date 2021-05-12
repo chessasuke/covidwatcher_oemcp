@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
-import 'building_event_model.dart';
+import 'event_model.dart';
 
 class AffectedBuilding {
   AffectedBuilding({

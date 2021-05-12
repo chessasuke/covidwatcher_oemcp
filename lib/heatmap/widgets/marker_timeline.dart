@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-import '../../models/building_event_model.dart';
+import '../../models/event_model.dart';
 
 class MarkerTimeline extends StatelessWidget {
   const MarkerTimeline({this.buildingTimeline});

@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../app_themes/responsive.dart';
 import '../app_widgets/custom_animation.dart';
 import '../constants.dart';
-import '../user_management/logic/auth_logic.dart';
+import '../utils.dart';
 
 class ReportFormOEMCP extends StatelessWidget {
   @override
@@ -85,7 +85,7 @@ class ReportFormOEMCP extends StatelessWidget {
                           ),
                           child: TextButton(
                               onPressed: () {
-                                AuthenticationService.launchURL(
+                                Utils.launchURL(
                                     OEMCP_SELF_REPORT_URL);
                               },
                               child: Padding(
@@ -123,7 +123,7 @@ class ReportFormOEMCP extends StatelessWidget {
                           ),
                           child: TextButton(
                               onPressed: () {
-                                AuthenticationService.launchURL(
+                                Utils.launchURL(
                                     OEMCP_VACCINE_REPORT_URL);
                               },
                               child: Padding(
@@ -165,7 +165,7 @@ class ReportFormOEMCP extends StatelessWidget {
                             child: TextButton(
                               onPressed: () {
                                 if (!kIsWeb) {
-                                  AuthenticationService.launchEmailSubmission(
+                                  Utils.launchEmailSubmission(
                                       visitorReportEmail,
                                       reportEmailSubject,
                                       reportEmailBody);

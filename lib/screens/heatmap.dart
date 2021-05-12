@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../app_themes/responsive.dart';
 import '../app_widgets/mobile_page_manager.dart';
-import '../fcm/fcm_config.dart';
+import '../services_controller/fcm_services.dart';
 import '../heatmap/heatMap.dart';
 
 /// The first app screen displayed

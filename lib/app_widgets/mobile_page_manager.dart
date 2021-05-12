@@ -17,7 +17,7 @@ class _MobilePageManagerState extends State<MobilePageManager> {
     Heatmap(),
     News(),
     ScreenReport(),
-    ScreenAccount(),
+    ScreenUserAccount(),
   ];
 
   @override

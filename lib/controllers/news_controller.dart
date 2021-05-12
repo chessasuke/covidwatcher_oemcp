@@ -7,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/news_model.dart';
 
-
 /// Controls the news
 
 final newsProvider = ChangeNotifierProvider<NewsController>((ref) {
@@ -17,7 +16,7 @@ final newsProvider = ChangeNotifierProvider<NewsController>((ref) {
 class NewsController extends ChangeNotifier {
   NewsController() {
     _newsList = [];
-    updateList();
+    fetchNews();
   }
 
   List<NewsModel> _newsList;
@@ -36,9 +35,9 @@ class NewsController extends ChangeNotifier {
   /// if so move the computation to an isolate using the compute() function
 
   /// UPDATE NEWS LIST
-  Future<void> updateList() async {
+  Future<void> fetchNews() async {
     final responseBody =
-        await NewsService.sendRequest(pageIndex: _page, pageSize: _pageSize);
+        await NewsService.requestNews(pageIndex: _page, pageSize: _pageSize);
 
 //    print('responseBody: $responseBody');
 

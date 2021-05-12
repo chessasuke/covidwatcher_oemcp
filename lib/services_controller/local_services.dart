@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Services connected with the actual device,
 /// like fetching internal stored data with [SharedPreferences]
 
+/// Add the buildings we want to subscribe to, into the app [SharedPreferences]
+/// This way the subscriptions are store for the next time we open the app too
 Future<String> addNotifierBuildings(List<String> subscribedBuildings) async {
   print('set new buildings: ${subscribedBuildings.length}');
   final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -27,6 +29,8 @@ Future<String> addNotifierBuildings(List<String> subscribedBuildings) async {
   }
 }
 
+/// Remove from [SharedPreferences] the buildings we dont want
+/// to listen to fot notifications anymore
 Future<void> removeNotifierBuilding(String building) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final List<String> buildings = prefs.getStringList('sub')
@@ -34,11 +38,13 @@ Future<void> removeNotifierBuilding(String building) async {
   await prefs.setStringList('sub', buildings);
 }
 
+/// Loads the buildings we are subscribed to, from [SharedPreferences]
 Future<List<String>> getNotifierBuildings() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getStringList('sub');
 }
 
+/// Next functions are for settings in the heatmap (like date and rate filters)
 Future<void> restoreSettings() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final showBookmarked = await prefs.getBool('showBookmarked');

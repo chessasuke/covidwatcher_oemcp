@@ -9,7 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../providers/general_providers.dart';
 import '../../providers/notifications_providers.dart';
-import '../../user_management/logic/user_state.dart';
+import '../../controllers/user_state.dart';
 
 /// Notiifcation button widget
 /// A widget that when expanded, shows the user notifications
@@ -77,7 +77,7 @@ class FcmNotificationsBtn extends ConsumerWidget {
                             notification: notificationsList[itemCount],
                             deleteCallback: () async {
                               UserState userState =
-                                  context.read(userProvider.state);
+                                  context.read(userController.state);
 
                               /// Check if user session is still active
                               if (userState is UserLoaded) {

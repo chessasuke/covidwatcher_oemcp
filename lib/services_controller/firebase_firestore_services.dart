@@ -1,15 +1,17 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:covid_watcher/models/report_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../models/report_model.dart';
 
 /// Stream connected to firebase - listens for new covid cases
 final covidCasesProvider =
     StreamProvider.autoDispose<List<DocumentChange>>((ref) async* {
   final stream = FirebaseFirestore.instance
-      .collection('covid-cases')
+      .collection('covid-cases-verified')
+//      .collection('covid-cases')
 
       /// todo this is not working, it only works the first time is called
 //      .where("isVerified", isEqualTo: true)

@@ -8,7 +8,7 @@ import '../../providers/general_providers.dart';
 import '../../providers/heatmap_providers.dart';
 import '../../providers/notifications_providers.dart';
 import '../../services_controller/local_services.dart';
-import '../../user_management/logic/user_state.dart';
+import '../../controllers/user_state.dart';
 import 'subscribed_building_tile.dart';
 import 'favorite_search_tile.dart';
 import 'search_favorite_building.dart';
@@ -112,7 +112,7 @@ class SubscribedBuildingBtn extends ConsumerWidget {
                                   name: buildingsSubscribed[itemCount],
                                   callback: () async {
                                     UserState userState =
-                                        context.read(userProvider.state);
+                                        context.read(userController.state);
 
                                     /// Check if user session is still active
                                     if (userState is UserLoaded) {

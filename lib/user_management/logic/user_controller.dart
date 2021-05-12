@@ -1,13 +1,18 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:covid_watcher/constants.dart';
+import 'package:covid_watcher/services_controller/fcm_services.dart';
+import '../../constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AuthenticationService {
+/// Handles utils process + processes involving firestore service
+/// for the user management
+
+class UserController {
   final FirebaseAuth _auth;
-  AuthenticationService(this._auth);
+
+  UserController(this._auth);
 
   Stream<User> get authStateChanges => _auth.authStateChanges();
 
@@ -45,7 +50,7 @@ class AuthenticationService {
 
   // ignore: public_member_api_docs
   static bool isEmailError(String text) {
-    if (AuthenticationService.validateEmail(text) == 'Email bad format') {
+    if (UserController.validateEmail(text) == 'Email bad format') {
       return true;
     } else {
       return false;
@@ -187,6 +192,9 @@ class AuthenticationService {
           assert(userCredential.user.uid != null);
           assert(userCredential.user.email != null);
 
+          /// Initialize the manage token function
+          await FcmService.manageTokens();
+
           statusCode = 'ok';
         } else {
           await userCredential.user.sendEmailVerification();
@@ -296,29 +304,5 @@ class AuthenticationService {
     }
 
     return statusCode;
-  }
-
-  static Future<void> launchURL(String url) async {
-    print('url: $url');
-    try {
-      await launch(url);
-    } catch (e) {
-      await Clipboard.setData(const ClipboardData(text: visitorReportEmail));
-      print('couldnt launch url');
-    }
-  }
-
-  static Future<void> launchEmailSubmission(
-      String email, String subject, String body) async {
-    final Uri params = Uri(scheme: 'mailto', path: email, queryParameters: {
-      'subject': subject,
-      'body': body,
-    });
-    String url = params.toString();
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      print('Could not launch $url');
-    }
   }
 }

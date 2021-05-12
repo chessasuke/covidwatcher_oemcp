@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:covid_watcher/services_controller/firebase_auth_services.dart';
 
-import '../logic/auth_logic.dart';
+import '../logic/user_controller.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({
@@ -156,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                           hintText: "Email",
                           fillColor: Colors.white,
                           errorText: _isEditingEmail
-                              ? AuthenticationService.validateEmail(
+                              ? UserController.validateEmail(
                                           textControllerEmail.text) ==
                                       'Email bad format'
                                   ? 'Bad format'
@@ -232,13 +232,13 @@ class _SignUpState extends State<SignUp> {
                   hintText: 'Re-enter password',
                 ),
               ),
-              if (AuthenticationService
+              if (UserController
                       .validatePassword2(password1, password2) ==
                   'ok')
                 ReenterPassText(text: 'Password match', colour: true)
               else
                 ReenterPassText(
-                    text: AuthenticationService.validatePassword2(
+                    text: UserController.validatePassword2(
                         password1, password2),
                     colour: false),
 
@@ -255,13 +255,13 @@ class _SignUpState extends State<SignUp> {
                           width: double.maxFinite,
                           child: TextButton(
                             onPressed: () async {
-                              if (AuthenticationService.validateEmail(
+                              if (UserController.validateEmail(
                                           textControllerEmail.text) ==
                                       null &&
-                                  AuthenticationService.validatePassword(
+                                  UserController.validatePassword(
                                           password1) ==
                                       null &&
-                                  AuthenticationService.validatePassword2(
+                                  UserController.validatePassword2(
                                           password1, password2) ==
                                       'ok') {
                                 setState(() {

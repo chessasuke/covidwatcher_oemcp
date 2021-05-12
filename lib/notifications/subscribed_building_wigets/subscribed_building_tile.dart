@@ -24,16 +24,12 @@ class SubscribedBuildingTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(3.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              width: screenSize.width * 0.7,
-              child: Text(name, maxLines: 2, overflow: TextOverflow.clip),
-            ),
-            Flexible(
-              child: IconButton(
-                icon: const Icon(FontAwesomeIcons.solidTrashAlt),
-                onPressed: callback,
-              ),
+            Text(name, maxLines: 2, overflow: TextOverflow.clip),
+            IconButton(
+              icon: const Icon(FontAwesomeIcons.solidTrashAlt),
+              onPressed: callback,
             ),
           ],
         ),
