@@ -1,11 +1,11 @@
 import 'dart:collection';
 import 'dart:convert';
 
-import 'package:covid_watcher/services_controller/news_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/news_model.dart';
+import '../services_controller/news_service.dart';
 
 /// Controls the news
 
@@ -44,13 +44,15 @@ class NewsController extends ChangeNotifier {
     if (responseBody.isNotEmpty) {
       /// Decode with UTF8 to avoid messed up characters
       final List<int> codeUnits = responseBody.codeUnits;
-      final decodeData = const Utf8Decoder().convert(codeUnits);
+      final decodeData = const Utf8Decoder(allowMalformed: true)
+          .convert(codeUnits)
+          .replaceAll(RegExp(r'[^\x20-\x7E]'), '');
 
       /// extract content from json into List<dynamic>
       final List<dynamic> parsed =
-          jsonDecode(decodeData)['hits'] as List<dynamic>;
+          jsonDecode(decodeData)['articles'] as List<dynamic>;
 
-//      print('hits ${parsed.length} results');
+      print('hits ${parsed.length} results');
       bool contains = false;
 
       List<NewsModel> newItemList = [];

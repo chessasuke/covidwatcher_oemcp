@@ -12,10 +12,12 @@ import '../controllers/navigator_controller.dart';
 import '../models/fcm_notification_model.dart';
 import '../providers/notifications_providers.dart';
 
-/// FCM CONTROLLER - this file has the logic to handle
+/// Firebase Cloud Messaging Service
+
+/// this file has the logic to handle
 /// the Firebase Cloud Messaging (FCM), basically the Push Notifications
-/// There are 3 types states to manage, when the app is open and the user is
-/// inside the app, when the app is in the background, and when the app is terminated
+/// There are 3 types states to manage, when the app is open (the user is
+/// inside the app), when the app is in the background, and when the app is terminated
 
 /// Define a top-level named handler which background/terminated messages will call.
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -132,8 +134,13 @@ class FcmService {
     print('initializing FCM');
 
     /// On initialization subscribe to general topic
-    /// to receive broadcast-notifications
+    /// to receive broadcast-notifications and to the user
+    /// subscribed buildings stored into [SharedPreferences]
     await subscribeToTopic('broadcast');
+    List<String> userTopics = await getNotifierBuildings();
+    if (userTopics != null && userTopics.isNotEmpty) {
+      await Future.forEach(userTopics, subscribeToTopic);
+    }
 
     /// Set foreground messaging handler (THESE ARE IN-APP NOTIFICATIONS)
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {

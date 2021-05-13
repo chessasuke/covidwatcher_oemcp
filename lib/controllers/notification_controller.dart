@@ -6,12 +6,13 @@ class NotificationController {
   /// the controller first updates the new buildings locally
   /// in [SharedPreferences] by calling [addNotifierBuildings]
   /// if this goes well, sends this buldings to the Firebase Cloud Messaging server
-  /// if any of the buildings failed to get to the server then the controlelr
-  /// save those into failedToSubscribe list, which then use to remove the proper
-  /// buildings names from the [SharedPreferences] list.
+  /// if any of the buildings failed to get to the server then the controller
+  /// save those into failedToSubscribe list, which then use to remove the respective
+  /// buildings names from the [SharedPreferences] list (where they were saved before).
   /// This way the app is sync with the data in the server
   static Future<List<String>> subscribeToBuildings(
       List<String> buildings) async {
+    print('subscribing');
     List<String> failedToSubscribe = [];
 
     /// Store locally using [SharedPreferences]
@@ -35,6 +36,8 @@ class NotificationController {
 
   /// Unsubscribe from building
   static Future<bool> unsubscribeFromBuilding(String building) async {
+    /// THIS IS FOR JAN VIDEO - Change it back
+
     /// First try to unsubscribe from the topic (building) in the FCM server
     final bool response = await FcmService.subscribeToTopic(building);
 

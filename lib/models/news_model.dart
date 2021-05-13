@@ -10,7 +10,7 @@ class NewsModel {
     return NewsModel(
         title: json['title'] as String,
         url: json['url'] as String ?? '',
-        pubDate: json['pubDate'] as String ?? '',
+        pubDate: json['publishedAt'] as String ?? '',
         description: json['description'] as String ?? '');
   }
 

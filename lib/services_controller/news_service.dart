@@ -5,10 +5,12 @@ import '../constants.dart';
 
 class NewsService {
   static Future<String> requestNews(
-      {String authority = 'api.datanews.io',
-      String path = '/v1/news',
+      {
+//        String authority = 'api.datanews.io',
+      String authority = 'newsapi.org',
+      String endpoint = '/v2/everything',
       int pageIndex = 0,
-      pageSize = 100}) async {
+      pageSize = 25}) async {
     print('----------------------Sending HTTP Request---------------------');
 
     /// Request news from the last 2 weeks (Date.now - 14 days)
@@ -19,19 +21,22 @@ class NewsService {
 
     /// hardcoded
     final parameters = {
-      'apiKey': newsApiKey,
-      'q': '(covid+university+of+texas+at+dallas)',
+      'apiKey': newsApiKey2,
+      'q': '+covid',
+//      'q': 'covid AND ("university of texas at dallas")',
+//      'page': pageIndex.toString(),
+//      'pageSize': pageSize.toString(),
+      'sortBy': 'relevancy', //relevance
+      'language': 'en',
+      'source': 'the dallas morning news',
+//      'qInTitle': '"university of texas at dallas"',
       'from': fromDate,
       'to': toDate,
-      'language': 'en',
-      'page': pageIndex.toString(),
-      'size': pageSize.toString(),
-      'sortBy': 'relevance', //relevance
     };
 
     http.Response response;
     try {
-      response = await http.get(Uri.http(authority, path, parameters));
+      response = await http.get(Uri.https(authority, endpoint, parameters));
     } catch (e) {
       print('error: $e');
     }

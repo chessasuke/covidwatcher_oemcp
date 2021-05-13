@@ -57,48 +57,48 @@ class ScreenUserAccount extends ConsumerWidget {
                   ),
                 ),
               ),
-              if (kIsWeb && notificationRequest)
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    color: Colors.black,
-                    width: screenSize.width,
-                    height: 50,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                              text: 'Please ',
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: 'Enable Notifications',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () async {
-                                      final isAuthorize =
-                                          await FcmService.requestPermission();
-                                      if (isAuthorize) {
-                                        await FcmService
-                                            .subscribeTopicsAfterWebPermission();
-                                        context
-                                            .read(showNotificationRequest)
-                                            .state = false;
-                                      }
-                                    },
-                                ),
-                              ]),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+//              if (kIsWeb && notificationRequest)
+//                Align(
+//                  alignment: Alignment.bottomCenter,
+//                  child: Container(
+//                    color: Colors.black,
+//                    width: screenSize.width,
+//                    height: 50,
+//                    child: Row(
+//                      mainAxisAlignment: MainAxisAlignment.center,
+//                      children: [
+//                        RichText(
+//                          text: TextSpan(
+//                              text: 'Please ',
+//                              style: const TextStyle(
+//                                color: Colors.white,
+//                              ),
+//                              children: [
+//                                TextSpan(
+//                                  text: 'Enable Notifications',
+//                                  style: const TextStyle(
+//                                    color: Colors.white,
+//                                    decoration: TextDecoration.underline,
+//                                  ),
+//                                  recognizer: TapGestureRecognizer()
+//                                    ..onTap = () async {
+//                                      final isAuthorize =
+//                                          await FcmService.requestPermission();
+//                                      if (isAuthorize) {
+//                                        await FcmService
+//                                            .subscribeTopicsAfterWebPermission();
+//                                        context
+//                                            .read(showNotificationRequest)
+//                                            .state = false;
+//                                      }
+//                                    },
+//                                ),
+//                              ]),
+//                        )
+//                      ],
+//                    ),
+//                  ),
+//                ),
             ],
           )
         else if (currentUser == const UserInitial())
