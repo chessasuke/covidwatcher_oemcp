@@ -15,11 +15,12 @@ final buildingsResults = StateProvider<List<String>>((ref) => []);
 /// manages state of the List of notifications received from FCM (Firebase Cloud Messaging)
 final fcmNotificationListProvider =
     StateProvider<List<FcmNotificationModel>>((ref) => [
-          FcmNotificationModel(
-              id: 'some_random_id_this_is_an_example',
-              title: 'Example Notification1',
-              body: 'The body here',
-              time: DateTime.now().toString())
+          /// Initialize an example notification
+//          FcmNotificationModel(
+//              id: 'some_random_id_this_is_an_example',
+//              title: 'Example Notification1',
+//              body: 'The body here',
+//              time: DateTime.now().toString())
         ]);
 
 /// to provide a notification based on a given ID

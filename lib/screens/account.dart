@@ -1,8 +1,13 @@
+import 'dart:ui';
+
 import 'package:covid_watcher/app_themes/responsive.dart';
 import 'package:covid_watcher/app_widgets/web_menu.dart';
 import 'package:covid_watcher/controllers/user_state.dart';
+import 'package:covid_watcher/services_controller/fcm_services.dart';
 import 'package:covid_watcher/user_management/widgets/signin.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +22,7 @@ class ScreenUserAccount extends ConsumerWidget {
     final screenSize = MediaQuery.of(context).size;
     final UserState currentUser = watch(userController.state);
     final isLoading = watch(loadingProvider).state;
+    final notificationRequest = watch(showNotificationRequest).state;
 
     return SafeArea(
         child: Scaffold(
@@ -24,28 +30,76 @@ class ScreenUserAccount extends ConsumerWidget {
       children: [
         /// User is SIGNED IN
         if (currentUser is UserLoaded)
-          Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-              child: Container(
-                width: !ResponsiveWidget.isMobileScreen(context)
-                    ? screenSize.width * 0.7
-                    : screenSize.width,
-                decoration: BoxDecoration(
-                    color: Theme.of(context).buttonColor.withOpacity(
-                        0.7), //                color: Color(0xEB3A60),
-                    border: Border(
-                      left: BorderSide(color: Theme.of(context).dividerColor),
-                      right: BorderSide(color: Theme.of(context).dividerColor),
-                    )),
+          Stack(
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: AccountWidget(currentUser: currentUser.user),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                  child: Container(
+                    width: !ResponsiveWidget.isMobileScreen(context)
+                        ? screenSize.width * 0.7
+                        : screenSize.width,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).buttonColor.withOpacity(
+                            0.7), //                color: Color(0xEB3A60),
+                        border: Border(
+                          left:
+                              BorderSide(color: Theme.of(context).dividerColor),
+                          right:
+                              BorderSide(color: Theme.of(context).dividerColor),
+                        )),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: AccountWidget(currentUser: currentUser.user),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              if (kIsWeb && notificationRequest)
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    color: Colors.black,
+                    width: screenSize.width,
+                    height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                              text: 'Please ',
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'Enable Notifications',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () async {
+                                      final isAuthorize =
+                                          await FcmService.requestPermission();
+                                      if (isAuthorize) {
+                                        await FcmService
+                                            .subscribeTopicsAfterWebPermission();
+                                        context
+                                            .read(showNotificationRequest)
+                                            .state = false;
+                                      }
+                                    },
+                                ),
+                              ]),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+            ],
           )
         else if (currentUser == const UserInitial())
           Align(

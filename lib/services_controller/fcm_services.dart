@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covid_watcher/services_controller/local_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -88,6 +89,43 @@ class FcmService {
       // Any time the token refreshes, store this in the database too.
       FirebaseMessaging.instance.onTokenRefresh.listen(saveTokenToDatabase);
     }
+  }
+
+  static Future<bool> requestPermission() async {
+    NotificationSettings notificationSettings =
+        await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    print(
+        'User granted permission: ${notificationSettings.authorizationStatus}');
+    if (notificationSettings.authorizationStatus ==
+        AuthorizationStatus.authorized) {
+      print('authorize');
+      return true;
+    } else {
+      print('no authorization');
+      return false;
+    }
+  }
+
+  static Future<String> subscribeTopicsAfterWebPermission() async {
+    String statusCode = 'ok';
+    List<String> sub = await getNotifierBuildings();
+    if (sub != null && sub.isNotEmpty) {
+      try {
+        await Future.forEach(sub, subscribeToTopic);
+      } catch (e) {
+        statusCode = 'error';
+        print(e);
+      }
+    }
+    return statusCode;
   }
 
   static Future<void> initializeFCM(BuildContext context) async {

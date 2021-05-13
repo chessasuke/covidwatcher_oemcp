@@ -24,94 +24,93 @@ class News extends ConsumerWidget {
     final screenSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-//        appBar: CustomAppBar(),
         backgroundColor: Colors.black,
         body: Stack(
           children: [
-//            Container(
-//              constraints: BoxConstraints(
-//                maxHeight: screenSize.height,
-//                maxWidth: screenSize.width,
-//              ),
-//              decoration: const BoxDecoration(
-//                gradient: LinearGradient(
-//                  begin: Alignment.topLeft,
-//                  end: Alignment.bottomRight,
-//                  colors: [
-//                    Colors.white70,
-//                    Colors.grey,
-//                  ],
-//                ),
-//              ),
-//              child: Center(
-//                child: RefreshIndicator(
-//                  onRefresh: () async {
-////                    await context.read(newsProvider).updateList();
-//                  },
-//                  child: Column(
-//                    children: <Widget>[
-//                      Expanded(
-//                        child: CustomScrollView(
-//                          slivers: <Widget>[
-//                            SliverAppBar(
-////                              leading: Center(
-////                                child: Padding(
-////                                  padding: const EdgeInsets.only(left: 6.0),
-////                                  child: Text('Quick Links',
-////                                      style: Theme.of(context)
-////                                          .primaryTextTheme
-////                                          .bodyText2
-////                                          .copyWith(
-////                                              color: Colors.blue,
-////                                              fontSize:
-////                                                  FlexFontSize.getFontSize(
-////                                                          context)
-////                                                      .bodyText2
-////                                                      .fontSize)),
-////                                ),
-////                              ),
-//                              actions: [
-//                                Container(
-//                                    constraints: BoxConstraints(
-//                                        maxWidth: screenSize.width * 0.6),
-//                                    child: _Header())
-//                              ],
-//                              floating: true,
-//                              shadowColor: Colors.black,
-//                              backgroundColor: Colors.transparent,
-//                            ),
-//                            if ((dataController.getList != null) &&
-//                                (dataController.getList.isNotEmpty))
-//                              _Timeline(data: dataController.getList)
-//                            else
-//                              SliverFillRemaining(
-//                                child: Container(
-//                                    decoration: const BoxDecoration(
-//                                      gradient: LinearGradient(
-//                                        begin: Alignment.topLeft,
-//                                        end: Alignment.bottomRight,
-//                                        colors: [
-//                                          Colors.white54,
-//                                          Colors.white,
-//                                        ],
-//                                      ),
-//                                    ),
-//                                    child: Center(
-//                                        child: Container(
-//                                            width: 100,
-//                                            height: 100,
-//                                            child:
-//                                                CircularProgressIndicator()))),
+            Container(
+              constraints: BoxConstraints(
+                maxHeight: screenSize.height,
+                maxWidth: screenSize.width,
+              ),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.white70,
+                    Colors.grey,
+                  ],
+                ),
+              ),
+              child: Center(
+                child: RefreshIndicator(
+                  onRefresh: () async {
+//                    await context.read(newsProvider).updateList();
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: CustomScrollView(
+                          slivers: <Widget>[
+                            SliverAppBar(
+//                              leading: Center(
+//                                child: Padding(
+//                                  padding: const EdgeInsets.only(left: 6.0),
+//                                  child: Text('Quick Links',
+//                                      style: Theme.of(context)
+//                                          .primaryTextTheme
+//                                          .bodyText2
+//                                          .copyWith(
+//                                              color: Colors.blue,
+//                                              fontSize:
+//                                                  FlexFontSize.getFontSize(
+//                                                          context)
+//                                                      .bodyText2
+//                                                      .fontSize)),
+//                                ),
 //                              ),
-//                          ],
-//                        ),
-//                      ),
-//                      const SizedBox(height: 8),
-//                    ],
-//                  ),
-//                ),
-//              ),
-//            ),
+                              actions: [
+                                Container(
+                                    constraints: BoxConstraints(
+                                        maxWidth: screenSize.width * 0.6),
+                                    child: _Header())
+                              ],
+                              floating: true,
+                              shadowColor: Colors.black,
+                              backgroundColor: Colors.transparent,
+                            ),
+                            if ((dataController.getList != null) &&
+                                (dataController.getList.isNotEmpty))
+                              _Timeline(data: dataController.getList)
+                            else
+                              SliverFillRemaining(
+                                child: Container(
+                                    decoration: const BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [
+                                          Colors.white54,
+                                          Colors.white,
+                                        ],
+                                      ),
+                                    ),
+                                    child: const Center(
+                                        child: SizedBox(
+                                            width: 100,
+                                            height: 100,
+                                            child:
+                                                CircularProgressIndicator()))),
+                              ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             if (!ResponsiveWidget.isMobileScreen(context))
               Positioned(top: 10, left: 10, child: WebMenu()),
           ],

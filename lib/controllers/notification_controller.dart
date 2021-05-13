@@ -27,8 +27,9 @@ class NotificationController {
         if (!response) failedToSubscribe.add(element);
       });
     }
-    if (failedToSubscribe.isNotEmpty)
+    if (failedToSubscribe.isNotEmpty) {
       await Future.forEach(failedToSubscribe, removeNotifierBuilding);
+    }
     return failedToSubscribe;
   }
 

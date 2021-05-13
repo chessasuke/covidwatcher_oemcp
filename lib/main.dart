@@ -1,16 +1,17 @@
-import 'package:covid_watcher/providers/theme_provider.dart';
+import 'dart:io' show Platform;
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'dart:io' show Platform;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'app_themes/theme.dart';
-import 'services_controller/fcm_services.dart';
 import 'navigator/route_parser.dart';
 import 'navigator/router_delegate.dart';
+import 'providers/theme_provider.dart';
+import 'services_controller/fcm_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
